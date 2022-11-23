@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP VEML3328
+D Photo IC Sensors RGBCIR Color Sensor I2C bus OPLGA4
+K
+F https://componentsearchengine.com/Datasheets/1/VEML3328.pdf
+$ENDCMP
+#
+#End Doc Library
