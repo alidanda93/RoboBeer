@@ -1,0 +1,93 @@
+
+(kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
+  (symbol "2-1437565-7" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+    (property "Reference" "S" (id 0) (at -4.57542 5.59218 0)
+      (effects (font (size 1.27 1.27)) (justify bottom left))
+    )
+    (property "Value" "2-1437565-7" (id 1) (at -5.08939 -6.87067 0)
+      (effects (font (size 1.27 1.27)) (justify bottom left))
+    )
+    (property "Footprint" "SW_2-1437565-7" (id 2) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "Comment" "2-1437565-7" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (symbol "2-1437565-7_0_0"
+      (polyline
+        (pts (xy -5.08 2.54) (xy -2.54 2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 2.54) (xy -2.54 0.0)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 0.0) (xy -2.54 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 -2.54) (xy -5.08 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy 5.08 2.54) (xy 2.54 2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy 2.54 2.54) (xy 2.54 0.0)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy 2.54 0.0) (xy 2.54 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy 2.54 -2.54) (xy 5.08 -2.54)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy -2.54 0.0) (xy -1.778 0.0)) (stroke (width 0.1524))
+      )
+      (polyline
+        (pts (xy 2.54 0.0) (xy 1.778 0.0)) (stroke (width 0.1524))
+      )
+      (circle (center -1.524 0.0) (radius 0.254)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (circle (center 1.524 0.0) (radius 0.254)
+        (stroke (width 0.1524)) (fill (type none))
+      )
+      (polyline
+        (pts (xy -1.27 0.0) (xy 1.016 1.016)) (stroke (width 0.1524))
+      )
+      (rectangle (start -5.08 -5.08) (end 5.08 5.08)
+        (stroke (width 0.254)) (fill (type background))
+      )
+      (pin passive line (at -10.16 2.54 0) (length 5.08)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "1"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at -10.16 -2.54 0) (length 5.08)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "2"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 10.16 -2.54 180.0) (length 5.08)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "4"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin passive line (at 10.16 2.54 180.0) (length 5.08)
+        (name "~"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "3"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+    )
+  )
+)

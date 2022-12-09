@@ -1,7 +1,7 @@
 EESchema-LIBRARY Version 2.3
 #encoding utf-8
 #SamacSys ECAD Model VEML3328
-#/4966569/1006949/2.49/4/4/Integrated Circuit
+#/4966569/978948/2.49/4/4/Integrated Circuit
 DEF VEML3328 IC 0 30 Y Y 1 F N
 F0 "IC" 850 300 50 H V L CNN
 F1 "VEML3328" 850 200 50 H V L CNN
