@@ -42,16 +42,23 @@
 /* USER CODE BEGIN PD */
 
 #define STACK_SIZE 1000
-#define MAX_S_Time 1000
+#define MAX_S_Time 3000
 
 
 #define DELAY_1 10
 #define DELAY_2 10
+#define DELAY_3 100
+#define DELAY_4 20
 
 #define Code_Priority 2
 #define PRIORITY_ENCODER 5
 #define PRIORITY_TOF 7
+#define PRIORITY_RASP 3
+#define PRIORITY_SERVO 1
 
+
+#define SERVO_OPEN 500
+#define SERVO_CLOSED 2500
 
 /* USER CODE END PD */
 
@@ -81,7 +88,14 @@ BaseType_t xReturned_TofGetDistance;
 TaskHandle_t xHandle_TofGetDistance = NULL;
 
 int it_tim3=0;
+uint16_t servo_angle=0;
 
+BaseType_t xReturned_RASP;
+TaskHandle_t xHandle_RASP = NULL;
+
+
+BaseType_t xReturned_ControlServo;
+TaskHandle_t xHandle_ControlServo = NULL;
 
 /* USER CODE END PV */
 
@@ -90,10 +104,14 @@ void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
+/*Normal functions*/
+void ControlServo(int angle);
 
+/*Task Functions*/
 void codeTache (void * pvParameters);
 void GetEncoderValue(void * pvParameters);
 void TofGetDistance(void * pvParameters);
+void RaspRead (void * pvParameters);
 
 
 /* USER CODE END PFP */
@@ -114,7 +132,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 int __io_putchar(int ch) {
-	HAL_UART_Transmit(&hlpuart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&hlpuart1, (uint8_t *)&ch, 1, MAX_S_Time);
 	return ch;
 }
 
@@ -130,6 +148,7 @@ void codeTache (void * pvParameters) {
 }
 
 
+
 /*
  * Task taht would go get the TOF value.
  * Send it via UART or printf
@@ -139,11 +158,16 @@ void codeTache (void * pvParameters) {
 void TofGetDistance(void * pvParameters)
 {
 	printf("Ici init TOF\r\n");
-	uint32_t distance;
+	int distance;
 	int duree = (int) pvParameters;
 	while(1){
 		distance = tofReadDistance();//scan
-		printf("distance: %d\r\n", distance);
+		printf("distance : %d\r\n", distance);
+		if (distance <60){
+			ControlServo(SERVO_OPEN);
+		}else{
+			ControlServo(SERVO_CLOSED);
+		}
 		vTaskDelay(duree);
 	}
 }
@@ -161,6 +185,26 @@ void GetEncoderValue(void * pvParameters){
 	while(1){
 		angle = (TIM3->CNT);
 		printf("Encoder Ticks = %d\n\r", angle);
+		vTaskDelay(duree);
+	}
+}
+
+/*
+ * Function to control the servo motor
+ */
+void ControlServo(int angle){
+	TIM1 -> CCR1 = angle;
+	it_tim3=0;
+}
+
+
+
+void RaspRead (void * pvParameters) {
+	uint8_t MSG_Buffer[200] = {'\0'};
+	int duree = (int) pvParameters;
+	while (1) {
+		HAL_UART_Receive(&huart3, MSG_Buffer, sizeof(MSG_Buffer), MAX_S_Time);
+		printf("########## RASP says :   %s \r\n", MSG_Buffer);
 		vTaskDelay(duree);
 	}
 }
@@ -200,7 +244,10 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
+  MX_USART3_UART_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   initTof();
 
@@ -224,7 +271,7 @@ int main(void)
 
 
   xReturned_TofGetDistance = xTaskCreate(
-		  TofGetDistance, 	// Function that implements the task.
+		  TofGetDistance, 				// Function that implements the task.
 		  "TOF", 						// Text name for the task.
 		  STACK_SIZE, 					// Stack size in words, not bytes.
 		  (void *) DELAY_2, 			// Parameter passed into the task.
@@ -236,6 +283,39 @@ int main(void)
   } else{
 	printf("ERROR TofGetDistance NOT created \r\n");
 	while(1){}
+  }
+
+/*
+  xReturned_ControlServo = xTaskCreate(
+		  ControlServo, 				// Function that implements the task.
+		  "ServoMotor", 						// Text name for the task.
+		  STACK_SIZE, 					// Stack size in words, not bytes.
+		  (int *) servo_angle, 			// Parameter passed into the task.
+		  PRIORITY_SERVO,					// Priority at which the task is created.
+		  &xHandle_ControlServo );	// Used to pass out the created task's handle.
+
+  if(xReturned_ControlServo == pdPASS){
+	  printf("Task ControlServo created \r\n");
+  } else{
+	printf("ERROR ControlServo NOT created \r\n");
+	while(1){}
+  }
+ */
+
+
+  xReturned_RASP = xTaskCreate(
+		  RaspRead, 					// Function that implements the task.
+		  "Raspberry", 					// Text name for the task.
+		  STACK_SIZE, 					// Stack size in words, not bytes.
+		  (void *) DELAY_3, 			// Parameter passed into the task.
+		  PRIORITY_RASP,				// Priority at which the task is created.
+		  &xHandle_RASP ); 				// Used to pass out the created task's handle.
+
+  if (xReturned_RASP == pdPASS ){
+	  printf("Task RaspRead created \r\n");
+  } else{
+		printf("ERROR RaspRead not created \r\n");
+		while(1){}
   }
 
   vTaskStartScheduler();
