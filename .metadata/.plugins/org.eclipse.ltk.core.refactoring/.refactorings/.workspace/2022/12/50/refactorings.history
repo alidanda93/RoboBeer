@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;.org.eclipse.egit.core.cmp&apos;" deleteContents="false" description="Delete resource &apos;.org.eclipse.egit.core.cmp&apos;" element1="/.org.eclipse.egit.core.cmp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1671025718973"/>
+</session>
