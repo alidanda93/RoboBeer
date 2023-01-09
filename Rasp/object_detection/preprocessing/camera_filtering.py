@@ -1,9 +1,7 @@
 import cv2
 import numpy as np
-import serial
 import time
 
-# serial = serial.Serial ("/dev/ttyS0", 115200)
 
 def get_variable_name(variable):
     globals_dict = globals()
@@ -29,10 +27,6 @@ def drawContours(screen):
     else:
         return -1
 
-def Red_or_Green(red_surface,green_surface):
-    if red_surface>green_surface : 
-        
-        serial.write()
 
 cap = cv2.VideoCapture(0)
 
