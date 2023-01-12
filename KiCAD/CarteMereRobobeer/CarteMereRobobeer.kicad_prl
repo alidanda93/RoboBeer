@@ -32,12 +32,16 @@
       2,
       3,
       4,
+      5,
       9,
       10,
+      12,
       13,
       14,
       15,
       16,
+      17,
+      18,
       19,
       20,
       21,
@@ -56,7 +60,7 @@
       36,
       37
     ],
-    "visible_layers": "ff0fcff_ffffffff",
+    "visible_layers": "ff6fcff_7fffffff",
     "zone_display_mode": 0
   },
   "meta": {
