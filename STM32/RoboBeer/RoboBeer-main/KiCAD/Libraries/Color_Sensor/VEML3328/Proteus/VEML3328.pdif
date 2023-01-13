@@ -1,0 +1,116 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "VEML3328"
+   (description "Photo IC Sensors RGBCIR Color Sensor I2C bus OPLGA4")
+   (family "ANA")
+   (package "VEML3328")
+   (attribute "Datasheet Link" "https://componentsearchengine.com/Datasheets/1/VEML3328.pdf")
+   (attribute "Geometry.Height" "1.1mm")
+   (attribute "Manufacturer_Name" "Vishay")
+   (attribute "Manufacturer_Part_Number" "VEML3328")
+   (attribute "Mouser Part Number" "78-VEML3328")
+   (attribute "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Vishay-Semiconductors/VEML3328?qs=d0WKAl%252BL4Kbpb5hwM69hRw%3D%3D")
+   (attribute "Arrow Part Number" "VEML3328")
+   (attribute "Arrow Price/Stock" "https://www.arrow.com/en/products/veml3328/vishay?region=nac")
+   (attribute "Mouser Testing Part Number" "")
+   (attribute "Mouser Testing Price/Stock" "")
+   (gate
+    (symbol "VEML3328")
+    (pin "GND" 1 PS)
+    (pin "SDA" 2 PS)
+    (pin "SCL" 3 PS)
+    (pin "VDD" 4 PS)
+   )
+  )
+  (symbol "VEML3328"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 800 100) (pt 800 -200) (pt 200 -200) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 1000 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1000 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "VEML3328"
+   (units MM)
+   (layer TASM
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed true)
+      (pt -1 -0.625)
+      (pt 1 -0.625)
+      (pt 1 0.625)
+      (pt -1 0.625)
+      (pt -1 -0.625))))
+   (layer OCCA
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -3.1 1.625)
+      (pt 2.4 1.625)
+      (pt 2.4 -1.625)
+      (pt -3.1 -1.625)
+      (pt -3.1 1.625))))
+   (layer TSLK
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed false)
+      (pt -2.05 0.35)
+      (arc (pt -2.050 0.350) (pt -2.100 0.350) (pt -2.000 0.450) (start 180.0) (sweep -90.0))
+      (pt -2.05 0.45)
+      (arc (pt -2.050 0.450) (pt -2.100 0.350) (pt -2.000 0.450) (start 180.0) (sweep 90.0))
+      (pt -2.05 0.35)
+      (arc (pt -2.050 0.350) (pt -2.100 0.350) (pt -2.000 0.450) (start 180.0) (sweep -90.0))
+      (pt -2.05 0.45))))
+   (leg 1 (pt -0.950 0.350) (padstack 0))
+   (leg 2 (pt -0.950 -0.350) (padstack 0))
+   (leg 3 (pt 0.900 -0.350) (padstack 3))
+   (leg 4 (pt 0.950 0.350) (padstack 0))
+   (padstack 0
+    (plated false)
+    (pad (layer TCOP) (rectf 0.350 0.900 0 0 0.000))
+   )
+   (padstack 3
+    (plated false)
+    (pad (layer TCOP) (rectf 0.350 1.000 0 0 0.000))
+   )
+   (model "VEML3328.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

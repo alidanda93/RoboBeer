@@ -1,0 +1,70 @@
+/*
+ * led.c
+ *
+ *  Created on: Jan 12, 2023
+ *      Author: quent
+ */
+
+
+#include "led.h"
+
+
+void TurnOnLed(int i)
+{
+	switch (i)
+	{
+	case 1:
+		HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+	case 2:
+		HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+	case 3:
+		HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
+	case 4:
+		HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_SET);
+	}
+
+}
+
+
+
+void TurnOffLed(int i)
+{
+	switch (i)
+	{
+	case 1:
+		HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
+	case 2:
+			HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+	case 3:
+			HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+	case 4:
+			HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_RESET);
+	}
+
+}
+
+void SwitchLed(int i)
+{
+	switch (i)
+	{
+	case 1:
+			HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+	case 2:
+			HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
+	case 3:
+			HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
+	case 4:
+			HAL_GPIO_TogglePin(LED_4_GPIO_Port, LED_4_Pin);
+	}
+
+}
+
+
+void LedError()
+{
+	HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_SET);
+	Error_Handler();
+}

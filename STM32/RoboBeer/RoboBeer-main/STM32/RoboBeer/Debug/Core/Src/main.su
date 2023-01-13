@@ -1,0 +1,10 @@
+../Core/Src/main.c:117:6:codeTache	32	static
+../Core/Src/main.c:135:6:TofGetDistance	24	static
+../Core/Src/main.c:158:6:GetEncoderValue	24	static
+../Core/Src/main.c:173:6:RaspRead	224	static
+../Core/Src/main.c:190:5:main	8	static
+../Core/Src/main.c:385:6:SystemClock_Config	96	static
+../Core/Src/main.c:428:5:__io_putchar	16	static
+../Core/Src/main.c:433:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:438:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:448:6:Error_Handler	8	static,ignoring_inline_asm

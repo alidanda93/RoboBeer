@@ -1,0 +1,15 @@
+/*
+ * Servo.h
+ *
+ *  Created on: Jan 12, 2023
+ *      Author: quent
+ */
+
+#ifndef INC_SERVO_H_
+#define INC_SERVO_H_
+
+#include "main.h"
+
+int ControlServo(int angle);
+
+#endif /* INC_SERVO_H_ */

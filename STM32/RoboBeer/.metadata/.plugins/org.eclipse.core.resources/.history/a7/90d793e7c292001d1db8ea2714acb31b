@@ -1,0 +1,20 @@
+/*
+ * Servo.c
+ *
+ *  Created on: Jan 12, 2023
+ *      Author: quent
+ */
+
+
+#include "Servo.h"
+
+
+/*
+ * @ brief Function to control the servo motor
+ *
+ * @param angle : valeur de CCR associée à l'angle desiré
+ */
+void ControlServo(int angle){
+	TIM3 -> CCR1 = angle;
+	//it_tim3=0;
+}
