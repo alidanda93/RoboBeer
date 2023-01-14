@@ -33,7 +33,8 @@ uint8_t help[]=
 		"avancer : Faire tourner les MCC à la même vitesse, parametre : vitesse entre 0 et MAX_ARR\n\r"
 		"reculer : Faire tourner les MCC à la même vitesse, parametre : vitesse entre 0 et MAX_ARR\n\r"
 		"stop : Bloquer les MCC \n\r"
-		"tourner : Faire tourner les MCC dans des sens opposés, parametre : sens (droite) ou (gauche), vitesse entre 0 et MAX_ARR \n\r";
+		"tourner : Faire tourner les MCC dans des sens opposés, parametre : sens (droite) ou (gauche), vitesse entre 0 et MAX_ARR \n\r"
+		"servo : fait tourner la pince\n\r";
 
 
 uint8_t RTFM[]=
@@ -52,6 +53,8 @@ uint8_t reculer[]="avancer tout droit en marche arriere\r\n";
 uint8_t stop[]="bloquer les moteurs\r\n";
 
 uint8_t tourner[]="faire tourner le robot à droite ou à gauche\r\n";
+
+uint8_t servo[]="commande de la pince\r\n";
 
 uint8_t cmdNotFound[]="Command not found\r\n";
 
@@ -169,6 +172,11 @@ void shellExec(void)
 			HAL_UART_Transmit(&huart1, tourner, sizeof(tourner), HAL_MAX_DELAY);
 			Tourner(atoi(argv[1]), atoi(argv[2]));
 		}
+	}
+	else if(strcmp(argv[0],"servo")==0)
+	{
+		HAL_UART_Transmit(&huart1, servo, sizeof(servo), HAL_MAX_DELAY);
+		ControlServo(atoi(argv[1]));
 	}
 	else{
 		shellCmdNotFound();
