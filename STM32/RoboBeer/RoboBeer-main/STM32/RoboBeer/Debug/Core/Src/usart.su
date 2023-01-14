@@ -1,4 +1,4 @@
-../Core/Src/usart.c:32:6:MX_USART1_UART_Init	8	static
-../Core/Src/usart.c:61:6:MX_USART2_UART_Init	8	static
-../Core/Src/usart.c:89:6:HAL_UART_MspInit	56	static
-../Core/Src/usart.c:151:6:HAL_UART_MspDeInit	16	static
+../Core/Src/usart.c:41:6:MX_USART1_UART_Init	8	static
+../Core/Src/usart.c:70:6:MX_USART2_UART_Init	8	static
+../Core/Src/usart.c:98:6:HAL_UART_MspInit	56	static
+../Core/Src/usart.c:166:6:HAL_UART_MspDeInit	16	static

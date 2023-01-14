@@ -18,8 +18,7 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USART_H__
-#define __USART_H__
+#ifndef __USART_H__t
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,7 +36,8 @@ extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN Private defines */
-
+#define UART_RX_BUFFER_SIZE 1
+#define UART_TX_BUFFER_SIZE 64
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);

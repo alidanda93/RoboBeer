@@ -46,7 +46,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/i2c.h ../Core/Inc/tim.h \
  ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/driver_ToF.h \
- ../Core/Inc/i2c.h ../Core/Inc/led.h ../Core/Inc/Servo.h
+ ../Core/Inc/i2c.h ../Core/Inc/led.h ../Core/Inc/Servo.h ../Core/Inc/PI.h \
+ ../Core/Inc/shell.h ../Core/Inc/led.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -103,3 +104,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/i2c.h:
 ../Core/Inc/led.h:
 ../Core/Inc/Servo.h:
+../Core/Inc/PI.h:
+../Core/Inc/shell.h:
+../Core/Inc/led.h:

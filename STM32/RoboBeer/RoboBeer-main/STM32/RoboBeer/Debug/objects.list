@@ -1,3 +1,4 @@
+"./Core/Src/PI.o"
 "./Core/Src/Servo.o"
 "./Core/Src/adc.o"
 "./Core/Src/driver_ToF.o"
@@ -6,6 +7,7 @@
 "./Core/Src/i2c.o"
 "./Core/Src/led.o"
 "./Core/Src/main.o"
+"./Core/Src/shell.o"
 "./Core/Src/stm32f1xx_hal_msp.o"
 "./Core/Src/stm32f1xx_it.o"
 "./Core/Src/syscalls.o"

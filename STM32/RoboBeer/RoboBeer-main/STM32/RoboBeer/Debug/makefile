@@ -64,8 +64,8 @@ all: main-build
 main-build: RoboBeer.elf secondary-outputs
 
 # Tool invocations
-RoboBeer.elf RoboBeer.map: $(OBJS) $(USER_OBJS) D:\Quentin_Documents\Cergy\ENSEA\3A\Projet\RoboBeer-main\RoboBeer-main\STM32\RoboBeer\STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RoboBeer.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Quentin_Documents\Cergy\ENSEA\3A\Projet\RoboBeer-main\RoboBeer-main\STM32\RoboBeer\STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RoboBeer.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+RoboBeer.elf RoboBeer.map: $(OBJS) $(USER_OBJS) D:\Quentin_Documents\Cergy\ENSEA\3A\Projet\Git\STM32\RoboBeer\RoboBeer-main\STM32\RoboBeer\STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "RoboBeer.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Quentin_Documents\Cergy\ENSEA\3A\Projet\Git\STM32\RoboBeer\RoboBeer-main\STM32\RoboBeer\STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RoboBeer.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

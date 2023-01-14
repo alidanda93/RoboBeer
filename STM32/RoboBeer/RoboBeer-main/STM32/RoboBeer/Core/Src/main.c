@@ -34,6 +34,8 @@
 #include "driver_ToF.h"
 #include "led.h"
 #include "Servo.h"
+#include "PI.h"
+#include "shell.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,6 +58,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+extern uint8_t uartRxReceived;
+extern uint8_t uartRxBuffer[UART_RX_BUFFER_SIZE];
+extern uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
 
 BaseType_t xReturned;
 TaskHandle_t xHandle1 = NULL;
@@ -221,6 +227,9 @@ int main(void)
   MX_TIM5_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
+  HAL_Delay(1);
+  shellInit();
 
   TurnOffLed(1);
   TurnOffLed(2);
@@ -356,7 +365,14 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-
+	  if(uartRxReceived){
+		  if(shellGetChar())
+		  {
+			  shellExec();
+			  shellPrompt();
+		  }
+		  uartRxReceived = 0;
+	  }
 	  /*for(int i = SERVO_MIN_VALUE; i < SERVO_MAX_VALUE; i+=100)
 	  {
 		  if(ControlServo(i) != 0)
@@ -438,6 +454,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!
 {
 	it_userButton = 1;
+}
+
+/**
+  * @brief  Function called at each new character received
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
+{
+	if(huart->Instance == USART1)
+	{
+		uartRxReceived = 1;
+		HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
+	}
+	else if(huart->Instance == USART2)
+	{
+		//interruption Raspberry
+	}
 }
 /* USER CODE END 4 */
 
