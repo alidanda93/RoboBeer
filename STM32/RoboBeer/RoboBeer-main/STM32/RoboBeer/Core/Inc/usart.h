@@ -18,7 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USART_H__t
+#ifndef __USART_H__
+#define __USART_H__
 
 #ifdef __cplusplus
 extern "C" {

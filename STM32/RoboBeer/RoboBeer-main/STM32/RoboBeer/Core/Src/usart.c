@@ -20,7 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
 
-
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
 #include "stdlib.h"

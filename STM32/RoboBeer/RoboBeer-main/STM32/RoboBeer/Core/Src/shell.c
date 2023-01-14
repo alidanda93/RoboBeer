@@ -27,9 +27,13 @@ uint8_t help[]=
 		"\r\n*-------------------------------*"
 		"\r\n| Functions available           |"
 		"\r\n*-------------------------------*\r\n"
-		"help : print this message\r\n"
-		"RTFM : do it!\r\n"
-		"led : turn on/off la led i ou i va de 1 a 4\r\n";
+		"help : Print this message\r\n"
+		"RTFM : Do it!\r\n"
+		"led : turn on/off la led i ou i va de 1 a 4\r\n"
+		"avancer : Faire tourner les MCC à la même vitesse, parametre : vitesse entre 0 et MAX_ARR\n\r"
+		"reculer : Faire tourner les MCC à la même vitesse, parametre : vitesse entre 0 et MAX_ARR\n\r"
+		"stop : Bloquer les MCC \n\r"
+		"tourner : Faire tourner les MCC dans des sens opposés, parametre : sens (droite) ou (gauche), vitesse entre 0 et MAX_ARR \n\r";
 
 
 uint8_t RTFM[]=
@@ -40,6 +44,14 @@ uint8_t RTFM[]=
 		"par exemple dans les forums de discussion.\n\r" ;
 
 uint8_t led[]="turn on/off la led selectionnee\n\r";
+
+uint8_t avancer[]="avancer tout droit en marche avant\r\n";
+
+uint8_t reculer[]="avancer tout droit en marche arriere\r\n";
+
+uint8_t stop[]="bloquer les moteurs\r\n";
+
+uint8_t tourner[]="faire tourner le robot à droite ou à gauche\r\n";
 
 uint8_t cmdNotFound[]="Command not found\r\n";
 
@@ -120,7 +132,8 @@ uint8_t shellGetChar(void){
   * @brief  Call function depends of the value of argc and argv
   * @retval None
   */
-void shellExec(void){
+void shellExec(void)
+{
 	if(strcmp(argv[0],"help")==0)
 	{
 		HAL_UART_Transmit(&huart1, help, sizeof(help), HAL_MAX_DELAY);
@@ -134,8 +147,32 @@ void shellExec(void){
 		HAL_UART_Transmit(&huart1, led, sizeof(led), HAL_MAX_DELAY);
 		SwitchLed(atoi(argv[1]));
 	}
+	else if(strcmp(argv[0],"avancer")==0)
+	{
+		HAL_UART_Transmit(&huart1, avancer, sizeof(avancer), HAL_MAX_DELAY);
+		Avancer(atoi(argv[1]));
+	}
+	else if(strcmp(argv[0],"reculer")==0)
+	{
+		HAL_UART_Transmit(&huart1, reculer, sizeof(reculer), HAL_MAX_DELAY);
+		Reculer(atoi(argv[1]));
+	}
+	else if(strcmp(argv[0],"stop")==0)
+	{
+		HAL_UART_Transmit(&huart1, stop, sizeof(stop), HAL_MAX_DELAY);
+		Stop();
+	}
+	else if(strcmp(argv[0],"tourner")==0)
+	{
+		if(strcmp(argv[1],"1")||strcmp(argv[1],"0"))
+		{
+			HAL_UART_Transmit(&huart1, tourner, sizeof(tourner), HAL_MAX_DELAY);
+			Tourner(atoi(argv[1]), atoi(argv[2]));
+		}
+	}
 	else{
 		shellCmdNotFound();
 	}
+
 }
 

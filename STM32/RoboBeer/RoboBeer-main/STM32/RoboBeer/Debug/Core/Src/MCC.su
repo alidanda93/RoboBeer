@@ -1,0 +1,4 @@
+../Core/Src/MCC.c:13:6:Avancer	16	static
+../Core/Src/MCC.c:23:6:Reculer	16	static
+../Core/Src/MCC.c:32:6:Stop	4	static
+../Core/Src/MCC.c:42:6:Tourner	16	static

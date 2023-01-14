@@ -1,3 +1,4 @@
+"./Core/Src/MCC.o"
 "./Core/Src/PI.o"
 "./Core/Src/Servo.o"
 "./Core/Src/adc.o"
