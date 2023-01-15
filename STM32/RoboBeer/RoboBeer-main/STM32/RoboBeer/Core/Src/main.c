@@ -82,7 +82,14 @@ TaskHandle_t xHandle_TofGetDistance = NULL;
 
 int it_userButton = 0;
 int it_tim3 = 0;
+int it_tim7 = 0;
+
 uint16_t servo_angle=0;
+int tickD = 0;
+int tickG = 0;
+int speedD = 0;
+int speedG = 0;
+int enableUserButton = 0;
 
 BaseType_t xReturned_RASP;
 TaskHandle_t xHandle_RASP = NULL;
@@ -227,6 +234,7 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM5_Init();
   MX_ADC1_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
   HAL_Delay(1);
@@ -242,7 +250,12 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_PWM_Start_IT(&htim3, TIM_CHANNEL_1);
 
+  InitMCC();
 
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+  HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL);
+
+  HAL_TIM_Base_Start_IT(&htim7); //interrupt chaque second pour print les données dans le shell
   //HAL_Delay(3000);
 
   /*if(ControlServo(10000) != 0)
@@ -385,11 +398,31 @@ int main(void)
 
 	  if(it_userButton)
 	  {
-		  SwitchLed(1);
+		  enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
+
+
+
+		  //sprintf((char *)MSG, "Speed = %f tick/periode\n\r", -TICK2SPEED_TIM4 * speed);
+		  //HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+
 		  it_userButton = 0;
-		  printf("userButton\n\r");
 	  }
 
+	  if(it_tim7)
+	  {
+		  ReadEncodeur();
+		  //ReadSpeed();
+		  if(enableUserButton)
+		  {
+			  uint8_t MSG[CMD_BUFFER_SIZE] = {'\0'};
+
+			  sprintf((char *)MSG, "Encoder Ticks D = %d\n\r", tickD);
+			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
+			  sprintf((char *)MSG, "Encoder Ticks G = %d\n\r", tickG);
+			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
+		  }
+		  it_tim7 = 0;
+	  }
 
   }
   /* USER CODE END 3 */
@@ -450,6 +483,7 @@ int __io_putchar(int ch) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM3) it_tim3=1; // Tim 3 avce servo donc pas d'interrupt...inutile
+	else if (htim->Instance == TIM7) it_tim7=1;
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!

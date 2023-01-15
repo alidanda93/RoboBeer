@@ -15,12 +15,19 @@
 #include <string.h>
 
 #define  MAX_ARR 200
+#define Mid_Period_TIM2 65535/2
+#define Mid_Period_TIM5 65535/2
 
 
+void InitMCC();
 void Avancer(int);
 void Reculer(int);
 void Stop(void);
 void Tourner(int, int);
+
+void ReadEncodeur();
+void ReadSpeed();
+
 
 
 

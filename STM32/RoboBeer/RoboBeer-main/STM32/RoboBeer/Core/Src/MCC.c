@@ -8,7 +8,19 @@
 
 #include "MCC.h"
 
+extern int tickD;
+extern int tickG;
+extern int speedD;
+extern int speedG;
 
+void InitMCC()
+{
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+	Stop();
+}
 
 void Avancer(int vitesse)
 {
@@ -60,5 +72,21 @@ void Tourner(int sens, int vitesse)
 	else Error_Handler();
 
 }
+
+void ReadEncodeur()
+{
+	tickD = (TIM2->CNT);
+	tickG = (TIM5->CNT);
+}
+
+void ReadSpeed()
+{
+	speedD = ((TIM2->CNT))- Mid_Period_TIM2;
+	TIM2->CNT = Mid_Period_TIM2;
+
+	speedG = ((TIM5->CNT))- Mid_Period_TIM5;
+	TIM5->CNT = Mid_Period_TIM5;
+}
+
 
 
