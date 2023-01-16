@@ -30,5 +30,24 @@ void Debut_Test()
 
 void Test_Odometrie_Carre()
 {
-	avancer
+	/* avancer 1*/
+
+
+
+	/* tourner gauche */
+
+	/* avancer 2 */
+
+	/* tourner gauche */
+
+	/*	avancer 3 */
+
+	/* tourner gauche */
+
+	/* avancer 4 */
+
+	/* tourner gauche */
+
+	//fin du carre
+	/* ouvrir + fermer pince */
 }

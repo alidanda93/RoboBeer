@@ -81,10 +81,6 @@ TaskHandle_t xHandle_Encoder = NULL;
 BaseType_t xReturned_TofGetDistance;
 TaskHandle_t xHandle_TofGetDistance = NULL;
 
-int it_userButton = 0;
-int it_tim3 = 0;
-int it_tim7 = 0;
-int it_tim6 = 0;
 
 uint16_t servo_angle=0;
 
@@ -395,99 +391,11 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  if(uartRxReceived){
-		  if(shellGetChar())
-		  {
-			  shellExec();
-			  shellPrompt();
-		  }
-		  uartRxReceived = 0;
-	  }
-	  /*for(int i = SERVO_MIN_VALUE; i < SERVO_MAX_VALUE; i+=100)
-	  {
-		  if(ControlServo(i) != 0)
-		    {
-		  	  Error_Handler();
-		    }
-		  HAL_Delay(500);
-	  }*/
-
-	  if(it_userButton)
-	  {
-		  enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
-		  it_userButton = 0;
-	  }
-
-	  if(it_tim7)
-	  {
-		  //ReadEncodeur();
-
-		  if(enableUserButton)
-		  {
-			  uint8_t MSG[CMD_BUFFER_SIZE] = {'\0'};
-
-			  sprintf((char *)MSG, "Encoder Ticks D = %d\n\r", tickD * MAX_ARR / OmaxD);
-			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
-			  sprintf((char *)MSG, "Encoder Ticks G = %d\n\r", tickG * MAX_ARR / OmaxG);
-			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
-		  }
-		  it_tim7 = 0;
-	  }
-
-	  if(it_tim6)
-	  	  {
-	  		  ReadEncodeur();
-
-	  		  if(consigneD == 0)
-	  		  {
-	  			  Stop();
-	  		  }
-
-	  		  else
-	  		  {
-	  			switch(action)
-	  			{
-	  			case AVANCER :
-	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-	  				AvancerPI(0, MoteurD.out);
-	  				AvancerPI(1, MoteurG.out);
-	  				break;
-
-	  			case RECULER :
-	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-	  				ReculerPI(0, MoteurD.out);
-	  				ReculerPI(1, MoteurG.out);
-	  				break;
-
-	  			case TOURNER :
-	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-	  				if(sens)
-	  				{
-	  					ReculerPI(0, MoteurD.out);
-	  					AvancerPI(1, MoteurG.out);
-	  				}
-	  				else
-	  				{
-	  					AvancerPI(0, MoteurD.out);
-	  					ReculerPI(1, MoteurG.out);
-	  				}
-	  				break;
-
-	  			default :
-	  				Stop();
-	  				break;
-	  			}
-
-	  		  }
 
 
 
 
-	  		  it_tim6 = 0;
-	  	  }
+
 
   }
   /* USER CODE END 3 */
@@ -547,14 +455,74 @@ int __io_putchar(int ch) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Instance == TIM3) it_tim3=1; // Tim 3 avce servo donc pas d'interrupt...inutile
-	else if (htim->Instance == TIM7) it_tim7=1;
-	else if (htim->Instance == TIM6) it_tim6=1;
+	if (htim->Instance == TIM3) // Tim 3 avce servo donc pas d'interrupt...inutile
+	{
+
+	}
+
+
+
+	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
+	{
+
+	}
+
+
+
+	else if (htim->Instance == TIM6) //Tim 6 asserv en vitesse a 0.1sec
+		{
+		  ReadEncodeur();
+
+		  if(consigneD == 0)
+		  {
+			  Stop();
+		  }
+
+		  else
+		  {
+			switch(action)
+			{
+			case AVANCER :
+				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+				AvancerPI(0, MoteurD.out);
+				AvancerPI(1, MoteurG.out);
+				break;
+
+			case RECULER :
+				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+				ReculerPI(0, MoteurD.out);
+				ReculerPI(1, MoteurG.out);
+				break;
+
+			case TOURNER :
+				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+				if(sens)
+				{
+					ReculerPI(0, MoteurD.out);
+					AvancerPI(1, MoteurG.out);
+				}
+				else
+				{
+					AvancerPI(0, MoteurD.out);
+					ReculerPI(1, MoteurG.out);
+				}
+				break;
+
+			default :
+				Stop();
+				break;
+			}
+
+		  }
+		}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!
 {
-	it_userButton = 1;
+	enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
 }
 
 /**
@@ -565,8 +533,12 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 {
 	if(huart->Instance == USART1)
 	{
-		uartRxReceived = 1;
 		HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
+		if(shellGetChar())
+		{
+		  shellExec();
+		  shellPrompt();
+		}
 	}
 	else if(huart->Instance == USART2)
 	{

@@ -195,8 +195,17 @@ void shellExec(void)
 	else if(strcmp(argv[0],"servo")==0)
 	{
 		HAL_UART_Transmit(&huart1, servo, sizeof(servo), HAL_MAX_DELAY);
-		ControlServo(atoi(argv[1]));
+		if(strcmp(argv[1],"ouvert")==0)
+		{
+			ControlServo(SERVO_OPEN);
+		}
+		else if(strcmp(argv[1],"ferme")==0)
+		{
+			ControlServo(SERVO_CLOSED);
+		}
+		else ControlServo(atoi(argv[1]));
 	}
+
 	else{
 		shellCmdNotFound();
 	}
