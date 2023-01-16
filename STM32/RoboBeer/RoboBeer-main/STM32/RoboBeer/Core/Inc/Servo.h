@@ -13,8 +13,8 @@
 #define SERVO_MIN_VALUE 800		//should be between 1000 and 2000
 #define SERVO_MAX_VALUE 2200
 
-#define SERVO_OPEN 21
-#define SERVO_CLOSED 122
+#define SERVO_OPEN 840
+#define SERVO_CLOSED 1400
 
 int ControlServo(int angle);
 

@@ -37,6 +37,7 @@
 #include "MCC.h"
 #include "PI.h"
 #include "shell.h"
+#include "Test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -83,13 +84,25 @@ TaskHandle_t xHandle_TofGetDistance = NULL;
 int it_userButton = 0;
 int it_tim3 = 0;
 int it_tim7 = 0;
+int it_tim6 = 0;
 
 uint16_t servo_angle=0;
+
+
+int X_odo = 0;
+int Y_odo = 0;
 int tickD = 0;
+int consigneD = 0;
 int tickG = 0;
-int speedD = 0;
-int speedG = 0;
+int consigneG = 0;
+int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
+int sens = 0;
+
+
 int enableUserButton = 0;
+
+PIController MoteurD;
+PIController MoteurG;
 
 BaseType_t xReturned_RASP;
 TaskHandle_t xHandle_RASP = NULL;
@@ -235,6 +248,7 @@ int main(void)
   MX_TIM5_Init();
   MX_ADC1_Init();
   MX_TIM7_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
   HAL_Delay(1);
@@ -245,15 +259,17 @@ int main(void)
   TurnOffLed(3);
   TurnOffLed(4);
 
-  SwitchLed(4);
-
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_PWM_Start_IT(&htim3, TIM_CHANNEL_1);
 
+  HAL_TIM_Base_Start_IT(&htim6);
   InitMCC();
 
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
   HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL);
+
+  PIController_Init(&MoteurD);
+  PIController_Init(&MoteurG);
 
   HAL_TIM_Base_Start_IT(&htim7); //interrupt chaque second pour print les données dans le shell
   //HAL_Delay(3000);
@@ -399,30 +415,79 @@ int main(void)
 	  if(it_userButton)
 	  {
 		  enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
-
-
-
-		  //sprintf((char *)MSG, "Speed = %f tick/periode\n\r", -TICK2SPEED_TIM4 * speed);
-		  //HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-
 		  it_userButton = 0;
 	  }
 
 	  if(it_tim7)
 	  {
-		  ReadEncodeur();
-		  //ReadSpeed();
+		  //ReadEncodeur();
+
 		  if(enableUserButton)
 		  {
 			  uint8_t MSG[CMD_BUFFER_SIZE] = {'\0'};
 
-			  sprintf((char *)MSG, "Encoder Ticks D = %d\n\r", tickD);
+			  sprintf((char *)MSG, "Encoder Ticks D = %d\n\r", tickD * MAX_ARR / OmaxD);
 			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
-			  sprintf((char *)MSG, "Encoder Ticks G = %d\n\r", tickG);
+			  sprintf((char *)MSG, "Encoder Ticks G = %d\n\r", tickG * MAX_ARR / OmaxG);
 			  HAL_UART_Transmit(&huart1, MSG, sizeof(MSG), 100);
 		  }
 		  it_tim7 = 0;
 	  }
+
+	  if(it_tim6)
+	  	  {
+	  		  ReadEncodeur();
+
+	  		  if(consigneD == 0)
+	  		  {
+	  			  Stop();
+	  		  }
+
+	  		  else
+	  		  {
+	  			switch(action)
+	  			{
+	  			case AVANCER :
+	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+	  				AvancerPI(0, MoteurD.out);
+	  				AvancerPI(1, MoteurG.out);
+	  				break;
+
+	  			case RECULER :
+	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+	  				ReculerPI(0, MoteurD.out);
+	  				ReculerPI(1, MoteurG.out);
+	  				break;
+
+	  			case TOURNER :
+	  				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+	  				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+	  				if(sens)
+	  				{
+	  					ReculerPI(0, MoteurD.out);
+	  					AvancerPI(1, MoteurG.out);
+	  				}
+	  				else
+	  				{
+	  					AvancerPI(0, MoteurD.out);
+	  					ReculerPI(1, MoteurG.out);
+	  				}
+	  				break;
+
+	  			default :
+	  				Stop();
+	  				break;
+	  			}
+
+	  		  }
+
+
+
+
+	  		  it_tim6 = 0;
+	  	  }
 
   }
   /* USER CODE END 3 */
@@ -484,6 +549,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM3) it_tim3=1; // Tim 3 avce servo donc pas d'interrupt...inutile
 	else if (htim->Instance == TIM7) it_tim7=1;
+	else if (htim->Instance == TIM6) it_tim6=1;
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!

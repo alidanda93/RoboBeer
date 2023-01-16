@@ -8,6 +8,7 @@ C_SRCS += \
 ../Core/Src/MCC.c \
 ../Core/Src/PI.c \
 ../Core/Src/Servo.c \
+../Core/Src/Test.c \
 ../Core/Src/adc.c \
 ../Core/Src/driver_ToF.c \
 ../Core/Src/freertos.c \
@@ -28,6 +29,7 @@ OBJS += \
 ./Core/Src/MCC.o \
 ./Core/Src/PI.o \
 ./Core/Src/Servo.o \
+./Core/Src/Test.o \
 ./Core/Src/adc.o \
 ./Core/Src/driver_ToF.o \
 ./Core/Src/freertos.o \
@@ -48,6 +50,7 @@ C_DEPS += \
 ./Core/Src/MCC.d \
 ./Core/Src/PI.d \
 ./Core/Src/Servo.d \
+./Core/Src/Test.d \
 ./Core/Src/adc.d \
 ./Core/Src/driver_ToF.d \
 ./Core/Src/freertos.d \
@@ -72,7 +75,7 @@ Core/Src/%.o Core/Src/%.su: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/MCC.d ./Core/Src/MCC.o ./Core/Src/MCC.su ./Core/Src/PI.d ./Core/Src/PI.o ./Core/Src/PI.su ./Core/Src/Servo.d ./Core/Src/Servo.o ./Core/Src/Servo.su ./Core/Src/adc.d ./Core/Src/adc.o ./Core/Src/adc.su ./Core/Src/driver_ToF.d ./Core/Src/driver_ToF.o ./Core/Src/driver_ToF.su ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/i2c.d ./Core/Src/i2c.o ./Core/Src/i2c.su ./Core/Src/led.d ./Core/Src/led.o ./Core/Src/led.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/shell.d ./Core/Src/shell.o ./Core/Src/shell.su ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/tim.su ./Core/Src/usart.d ./Core/Src/usart.o ./Core/Src/usart.su
+	-$(RM) ./Core/Src/MCC.d ./Core/Src/MCC.o ./Core/Src/MCC.su ./Core/Src/PI.d ./Core/Src/PI.o ./Core/Src/PI.su ./Core/Src/Servo.d ./Core/Src/Servo.o ./Core/Src/Servo.su ./Core/Src/Test.d ./Core/Src/Test.o ./Core/Src/Test.su ./Core/Src/adc.d ./Core/Src/adc.o ./Core/Src/adc.su ./Core/Src/driver_ToF.d ./Core/Src/driver_ToF.o ./Core/Src/driver_ToF.su ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/i2c.d ./Core/Src/i2c.o ./Core/Src/i2c.su ./Core/Src/led.d ./Core/Src/led.o ./Core/Src/led.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/shell.d ./Core/Src/shell.o ./Core/Src/shell.su ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/tim.su ./Core/Src/usart.d ./Core/Src/usart.o ./Core/Src/usart.su
 
 .PHONY: clean-Core-2f-Src
 

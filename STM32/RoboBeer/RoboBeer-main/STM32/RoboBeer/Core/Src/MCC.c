@@ -13,6 +13,7 @@ extern int tickG;
 extern int speedD;
 extern int speedG;
 
+
 void InitMCC()
 {
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
@@ -32,6 +33,21 @@ void Avancer(int vitesse)
 
 }
 
+void AvancerPI(int moteur, int vitesse)
+{
+	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
+	if (moteur)
+	{
+		TIM1->CCR1=0;
+		TIM1->CCR2=vitesse;
+	}
+	else
+	{
+		TIM1->CCR3=0;
+		TIM1->CCR4=vitesse;
+	}
+}
+
 void Reculer(int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -39,6 +55,21 @@ void Reculer(int vitesse)
 	TIM1->CCR2=vitesse;
 	TIM1->CCR3=0;
 	TIM1->CCR4=vitesse;
+}
+
+void ReculerPI(int moteur, int vitesse)
+{
+	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
+	if (moteur)
+	{
+		TIM1->CCR1=vitesse;
+		TIM1->CCR2=0;
+	}
+	else
+	{
+		TIM1->CCR3=vitesse;
+		TIM1->CCR4=0;
+	}
 }
 
 void Stop(void)
@@ -75,18 +106,10 @@ void Tourner(int sens, int vitesse)
 
 void ReadEncodeur()
 {
-	tickD = (TIM2->CNT);
-	tickG = (TIM5->CNT);
-}
-
-void ReadSpeed()
-{
-	speedD = ((TIM2->CNT))- Mid_Period_TIM2;
+	tickD = Mid_Period_TIM2 - (TIM2->CNT);
 	TIM2->CNT = Mid_Period_TIM2;
-
-	speedG = ((TIM5->CNT))- Mid_Period_TIM5;
+	tickG = (TIM5->CNT) - Mid_Period_TIM5;
 	TIM5->CNT = Mid_Period_TIM5;
 }
-
 
 

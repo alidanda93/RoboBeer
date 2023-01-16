@@ -1,6 +1,7 @@
 "./Core/Src/MCC.o"
 "./Core/Src/PI.o"
 "./Core/Src/Servo.o"
+"./Core/Src/Test.o"
 "./Core/Src/adc.o"
 "./Core/Src/driver_ToF.o"
 "./Core/Src/freertos.o"

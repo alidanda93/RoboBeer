@@ -15,6 +15,10 @@
 #include "shell.h"
 #include "usart.h"
 
+extern int consigneD;
+extern int consigneG;
+extern int action;
+extern int sens;
 
 uint8_t prompt[]="robobeer>";
 uint8_t started[]=
@@ -173,6 +177,21 @@ void shellExec(void)
 			Tourner(atoi(argv[1]), atoi(argv[2]));
 		}
 	}
+	else if(strcmp(argv[0],"avancerPI")==0)
+	{
+		HAL_UART_Transmit(&huart1, avancer, sizeof(avancer), HAL_MAX_DELAY);
+		consigneD = atoi(argv[1]);
+		consigneG = atoi(argv[1]);
+	}
+	else if(strcmp(argv[0],"actionPI")==0)
+	{
+		HAL_UART_Transmit(&huart1, avancer, sizeof(avancer), HAL_MAX_DELAY);
+		action = atoi(argv[1]);
+		if(action ==2) sens = atoi(argv[3]);
+		consigneD = atoi(argv[2]);
+		consigneG = atoi(argv[2]);
+	}
+
 	else if(strcmp(argv[0],"servo")==0)
 	{
 		HAL_UART_Transmit(&huart1, servo, sizeof(servo), HAL_MAX_DELAY);
