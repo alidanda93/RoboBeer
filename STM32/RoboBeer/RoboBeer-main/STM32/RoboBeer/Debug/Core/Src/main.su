@@ -3,9 +3,9 @@
 ../Core/Src/main.c:181:6:GetEncoderValue	24	static
 ../Core/Src/main.c:196:6:RaspRead	224	static
 ../Core/Src/main.c:213:5:main	8	static
-../Core/Src/main.c:408:6:SystemClock_Config	96	static
-../Core/Src/main.c:451:5:__io_putchar	16	static
-../Core/Src/main.c:456:6:HAL_TIM_PeriodElapsedCallback	24	static
-../Core/Src/main.c:523:6:HAL_GPIO_EXTI_Callback	16	static
-../Core/Src/main.c:532:6:HAL_UART_RxCpltCallback	16	static
-../Core/Src/main.c:554:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:412:6:SystemClock_Config	96	static
+../Core/Src/main.c:455:5:__io_putchar	16	static
+../Core/Src/main.c:460:6:HAL_TIM_PeriodElapsedCallback	24	static
+../Core/Src/main.c:539:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:549:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:571:6:Error_Handler	8	static,ignoring_inline_asm

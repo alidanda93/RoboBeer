@@ -84,7 +84,7 @@ TaskHandle_t xHandle_TofGetDistance = NULL;
 
 uint16_t servo_angle=0;
 
-
+uint16_t dist = 0;
 int X_odo = 0;
 int Y_odo = 0;
 int tickD = 0;
@@ -93,7 +93,7 @@ int tickG = 0;
 int consigneG = 0;
 int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
 int sens = 0;
-
+extern int start;
 
 int enableUserButton = 0;
 
@@ -257,6 +257,7 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_PWM_Start_IT(&htim3, TIM_CHANNEL_1);
+  ControlServo(SERVO_CLOSED);
 
   HAL_TIM_Base_Start_IT(&htim6);
   InitMCC();
@@ -390,7 +391,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+	  if(start)
+	  {
+		  Test_Odometrie_Carre();
+	  }
 
 
 
@@ -464,13 +468,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
-
+		printf("%d\r\n", dist);
 	}
 
 
 
 	else if (htim->Instance == TIM6) //Tim 6 asserv en vitesse a 0.1sec
 		{
+
+		switch(action)
+		{
+		case TOURNER :
+			if(sens)dist -=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
+			else dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
+			break;
+		default :
+			dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ( Mid_Period_TIM5 - (TIM5->CNT)) ) / 2; //on moyenne la valeur
+			break;
+		}
+
 		  ReadEncodeur();
 
 		  if(consigneD == 0)
@@ -522,7 +538,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!
 {
-	enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
+	//enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
+	Debut_Test();
 }
 
 /**

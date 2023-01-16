@@ -10,6 +10,8 @@
 
 #include "main.h"
 
-void Test_Odometrie();
+void Debut_Test();
+void Test_Odometrie_Carre();
+void Test_Tourner();
 
 #endif /* INC_TEST_H_ */

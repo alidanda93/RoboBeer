@@ -27,6 +27,9 @@
 #define TOURNER		2
 #define STOP		3
 
+#define TOUR 2450
+
+
 void InitMCC();
 void Avancer(int);
 void AvancerPI(int moteur, int vitesse);
