@@ -323,9 +323,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
 		//printf("%d\r\n", dist);
-		printf("ali petit zizi ca rime...je dis ca je dis rien\r\n");
-		TOF_dist = tofReadDistance();//scan
-		printf("distance : %d\r\n", TOF_dist);
+		//printf("ali petit zizi ca rime...je dis ca je dis rien\r\n");
+		//TOF_dist = tofReadDistance();//scan
+		//printf("distance : %d\r\n", TOF_dist);
 	}
 
 	else if (htim->Instance == TIM4) //Delay Tof

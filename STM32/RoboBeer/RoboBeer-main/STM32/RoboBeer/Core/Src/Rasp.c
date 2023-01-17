@@ -37,11 +37,11 @@ uint8_t raspGetChar(void)
 	char* token;
 
 	cmdBufferRasp[idxCmdRasp++] = uartRxBufferRasp[0];
-	HAL_UART_Transmit(&huart2, uartRxBufferRasp, 1, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, uartRxBufferRasp, 1, HAL_MAX_DELAY); //ecrit à l'ordi
 
 	if(idxCmdRasp == NB_CARACT)
 		{
-			HAL_UART_Transmit(&huart2, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
+			HAL_UART_Transmit(&huart1, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
 			cmdBufferRasp[idxCmdRasp] = '\0';
 			argcRasp = 0;
 			token = (char*)strtok(cmdBufferRasp, " ");
@@ -59,7 +59,7 @@ uint8_t raspGetChar(void)
 
 void raspErrorReceive(void)
 {
-	HAL_UART_Transmit(&huart2, errlect, sizeof(errlect), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, errlect, sizeof(errlect), HAL_MAX_DELAY);
 }
 
 
@@ -75,7 +75,7 @@ void raspExec(void)
 		sens = atoi(argvRasp[2]);
 		couleur = atoi(argvRasp[3]);
 		TOF_dist = atoi(argvRasp[4]);
-		printf("%d %d %d %d\r\n", action, sens, couleur, TOF_dist);
+		//printf("%d %d %d %d\r\n", action, sens, couleur, TOF_dist);
 	}
 
 	else{
