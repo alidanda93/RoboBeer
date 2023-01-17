@@ -95,6 +95,8 @@ int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
 int sens = 0;
 extern int start;
 
+int TOF_dist = 0;
+
 int enableUserButton = 0;
 
 PIController MoteurD;
@@ -269,27 +271,8 @@ int main(void)
   PIController_Init(&MoteurG);
 
   HAL_TIM_Base_Start_IT(&htim7); //interrupt chaque second pour print les données dans le shell
-  //HAL_Delay(3000);
 
-  /*if(ControlServo(10000) != 0)
-  {
-	  Error_Handler();
-  }*/
-
-  /*
-  SwitchLed(3);
-  HAL_Delay(3000);
-  SwitchLed(3);
-
-  if(ControlServo(SERVO_CLOSED) != 0)
-  {
-	  Error_Handler();
-  }
-  */
-
-  //HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-  //initTof();
+  initTof();
 
 
 
@@ -393,7 +376,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if(start)
 	  {
-		  Test_Odometrie_Carre();
+		  //Test_Odometrie_Carre();
 	  }
 
 
@@ -459,16 +442,18 @@ int __io_putchar(int ch) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Instance == TIM3) // Tim 3 avce servo donc pas d'interrupt...inutile
+	if (htim->Instance == TIM3) // 50Hz freq lecture TOF
 	{
-
+		//TOF_dist = tofReadDistance();//scan
 	}
 
 
 
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
-		printf("%d\r\n", dist);
+		//printf("%d\r\n", dist);
+		TOF_dist = tofReadDistance();//scan
+		printf("distance : %d\r\n", TOF_dist);
 	}
 
 

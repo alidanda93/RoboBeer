@@ -13,5 +13,6 @@
 void Debut_Test();
 void Test_Odometrie_Carre();
 void Test_Tourner();
+void Test_Canette();
 
 #endif /* INC_TEST_H_ */
