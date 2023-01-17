@@ -24,7 +24,6 @@ uint8_t newlineRasp[]="\r\n";
 
 char cmdBufferRasp[CMD_BUFFER_SIZE];
 extern uint8_t 	uartRxBufferRasp[UART_RX_BUFFER_SIZE];
-uint8_t	idxCmdRasp = 0;
 char* argvRasp[MAX_ARGS];
 uint8_t	argcRasp;
 extern uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
@@ -36,23 +35,25 @@ uint8_t raspGetChar(void)
 	uint8_t newCmdReady = 0;
 	char* token;
 
-	cmdBufferRasp[idxCmdRasp++] = uartRxBufferRasp[0];
-	HAL_UART_Transmit(&huart1, uartRxBufferRasp, 1, HAL_MAX_DELAY); //ecrit à l'ordi
+	HAL_UART_Transmit(&huart1, uartRxBufferRasp, 1, HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart1, uartRxBufferRasp, NB_CARACT, HAL_MAX_DELAY); //ecrit à l'ordi
+	HAL_UART_Transmit(&huart1, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
 
-	if(idxCmdRasp == NB_CARACT)
-		{
-			HAL_UART_Transmit(&huart1, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
-			cmdBufferRasp[idxCmdRasp] = '\0';
-			argcRasp = 0;
-			token = (char*)strtok(cmdBufferRasp, " ");
-			while(token!=NULL){
-				argvRasp[argcRasp++] = token;
-				token = (char*)strtok(NULL, " ");
-			}
 
-			idxCmdRasp = 0;
-			newCmdReady = 1;
-		}
+	argcRasp = 0;
+
+	for(int i = 0; i < NB_CARACT; i++)
+	{
+		cmdBufferRasp[i] = uartRxBufferRasp[i];
+	}
+
+	token = (char*)strtok(cmdBufferRasp, " ");
+	while(token!=NULL)
+	{
+		argvRasp[argcRasp++] = token;
+		token = (char*)strtok(NULL, " ");
+	}
+
 
 	return newCmdReady;
 }

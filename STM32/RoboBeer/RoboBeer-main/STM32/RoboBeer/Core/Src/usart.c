@@ -30,7 +30,7 @@ uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
 uint8_t stringSize;
 
 uint8_t uartRxReceivedRasp;
-uint8_t uartRxBufferRasp[UART_RX_BUFFER_SIZE];
+uint8_t uartRxBufferRasp[UART_RX_BUFFER_SIZE_RASP];
 uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
 uint8_t stringSizeRasp;
 

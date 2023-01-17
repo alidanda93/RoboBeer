@@ -206,11 +206,11 @@ int main(void)
   HAL_Delay(1);
   shellInit();
 
-  HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE);
+  HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
   HAL_Delay(1);
 
-  int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
-  TestSensorOnI2C(tabI2CAdd);
+  //int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
+  //TestSensorOnI2C(tabI2CAdd);
   initTof();
   //int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
   //TestSensorOnI2C(tabI2CAdd);
@@ -418,11 +418,9 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 	}
 	else if(huart->Instance == USART2)
 	{
-		HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE);
-		if(raspGetChar())
-		{
-			raspExec();
-		}
+		HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+		raspGetChar();
+		raspExec();
 	}
 }
 /* USER CODE END 4 */
