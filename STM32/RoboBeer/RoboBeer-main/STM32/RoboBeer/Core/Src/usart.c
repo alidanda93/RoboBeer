@@ -29,6 +29,10 @@ uint8_t uartRxBuffer[UART_RX_BUFFER_SIZE];
 uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
 uint8_t stringSize;
 
+uint8_t uartRxReceivedRasp;
+uint8_t uartRxBufferRasp[UART_RX_BUFFER_SIZE];
+uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
+uint8_t stringSizeRasp;
 
 /* USER CODE END 0 */
 
@@ -124,7 +128,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     __HAL_AFIO_REMAP_USART1_ENABLE();
 
     /* USART1 interrupt Init */
-    HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
@@ -154,7 +158,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(RASP_USART2_RX_GPIO_Port, &GPIO_InitStruct);
 
     /* USART2 interrupt Init */
-    HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspInit 1 */
 

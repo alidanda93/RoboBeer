@@ -275,7 +275,7 @@ int main(void)
 
 */
 
-  /*
+
   printf("2 \r\n");
   xReturned_TofGetDistance = xTaskCreate(
 		  TofGetDistance, 				// Function that implements the task.
@@ -291,7 +291,7 @@ int main(void)
 	printf("ERROR TofGetDistance NOT created \r\n");
 	while(1){}
   }
-*/
+
 
 
 /*
@@ -314,6 +314,7 @@ int main(void)
   semaphoreRASP = xSemaphoreCreateBinary();
   xSemaphoreGive(semaphoreRASP);
 
+  /*
   printf("3 \r\n");
   xReturned_RASP = xTaskCreate(
 		  RaspRead, 					// Function that implements the task.
@@ -329,6 +330,7 @@ int main(void)
 		printf("ERROR RaspRead not created \r\n");
 		while(1){}
   }
+  */
 
 
 

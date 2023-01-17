@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
 #include "adc.h"
 #include "i2c.h"
 #include "tim.h"
@@ -27,7 +26,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <FreeRTOS.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,6 +36,7 @@
 #include "PI.h"
 #include "shell.h"
 #include "Test.h"
+#include "Rasp.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,21 +64,25 @@ extern uint8_t uartRxReceived;
 extern uint8_t uartRxBuffer[UART_RX_BUFFER_SIZE];
 extern uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE];
 
-BaseType_t xReturned;
-TaskHandle_t xHandle1 = NULL;
-TaskHandle_t xHandle2 = NULL;
+extern uint8_t uartRxReceivedRasp;
+extern uint8_t uartRxBufferRasp[UART_RX_BUFFER_SIZE];
+extern uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
 
-/*
- * These are the private variables for the Encoder
- */
-BaseType_t xReturned_Encoder;
-TaskHandle_t xHandle_Encoder = NULL;
-
-/*
- * These are the private variables for the TOF
- */
-BaseType_t xReturned_TofGetDistance;
-TaskHandle_t xHandle_TofGetDistance = NULL;
+//BaseType_t xReturned;
+//TaskHandle_t xHandle1 = NULL;
+//TaskHandle_t xHandle2 = NULL;
+//
+///*
+// * These are the private variables for the Encoder
+// */
+//BaseType_t xReturned_Encoder;
+//TaskHandle_t xHandle_Encoder = NULL;
+//
+///*
+// * These are the private variables for the TOF
+// */
+//BaseType_t xReturned_TofGetDistance;
+//TaskHandle_t xHandle_TofGetDistance = NULL;
 
 
 uint16_t servo_angle=0;
@@ -93,6 +96,7 @@ int tickG = 0;
 int consigneG = 0;
 int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
 int sens = 0;
+int couleur = 0;
 extern int start;
 
 int TOF_dist = 0;
@@ -102,18 +106,11 @@ int enableUserButton = 0;
 PIController MoteurD;
 PIController MoteurG;
 
-BaseType_t xReturned_RASP;
-TaskHandle_t xHandle_RASP = NULL;
-SemaphoreHandle_t semaphoreRASP;
 
-
-BaseType_t xReturned_ControlServo;
-TaskHandle_t xHandle_ControlServo = NULL;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /*Normal functions*/
@@ -137,75 +134,29 @@ void RaspRead (void * pvParameters);
   */
 
 
-
-
-void codeTache (void * pvParameters) {
-	int compteur = 0;
-	int duree = (int) pvParameters;
-	char* s = pcTaskGetName(xTaskGetCurrentTaskHandle());
-	while (1) {
-		printf("Je suis la tache %s et je m'endors pour %d periodes\n", s, duree);
-		vTaskDelay(duree);
-		compteur++;
-	}
-}
-
-
-
-/*
- * Task that would go get the TOF value.
- * Send it via UART or printf
- * Task Delay of DELAY_TOF
- */
-void TofGetDistance(void * pvParameters)
+void TestSensorOnI2C(int * tab)
 {
-	printf("Ici init TOF\r\n");
-	int distance;
-	int duree = (int) pvParameters;
-	while(1){
-		distance = tofReadDistance();//scan
-		printf("distance : %d\r\n", distance);
-		if (distance <60){
-			ControlServo(SERVO_OPEN);
-		}else{
-			ControlServo(SERVO_CLOSED);
-		}
-		vTaskDelay(duree);
-	}
+	 int u = 0;
+
+	 printf("debut de lecture du bus I2c\r\n\n");
+	  for(int i =0; i< 256; i++)
+	  {
+		  int result = HAL_I2C_IsDeviceReady(&hi2c2, (uint16_t)(i),2,2);
+		  if (result != HAL_OK)//HAL_ERROR or HAL_TIMEOUT
+		  {
+			  printf("."); //No ACKreceived at the address
+		  }
+		  if (result == HAL_OK)
+		  {
+			  tab[u] = i;
+			  u++;
+			  printf("0x%X",i); //Received an ACK at the address
+		  }
+	  }
+	  printf("\r\n\nfin de lecture du bus I2C\r\n\n\n");
 }
 
 
-/*
- * Task that would go get the encoder value from the counter of the TIM3.
- * Transmit value via UART
- * Task Delay 1 OS tick = 1ms.
- * */
-void GetEncoderValue(void * pvParameters){
-	printf("Ici init Encodeur\r\n");
-	uint16_t angle;
-	int duree = (int) pvParameters;
-	while(1){
-		angle = (TIM3->CNT);
-		printf("Encoder Ticks = %d\n\r", angle);
-		vTaskDelay(duree);
-	}
-}
-
-
-
-
-
-void RaspRead (void * pvParameters) {
-	uint8_t MSG_Buffer[200] = {'\0'};
-	int duree = (int) pvParameters;
-	while (1) {
-		xSemaphoreTake(semaphoreRASP,RASP_UART_TO);
-		HAL_UART_Receive(&huart2, MSG_Buffer, sizeof(MSG_Buffer),RASP_UART_TO);
-		printf("%s\r\n", MSG_Buffer);
-		xSemaphoreGive(semaphoreRASP);
-		vTaskDelay(duree);
-	}
-}
 /* USER CODE END 0 */
 
 /**
@@ -236,8 +187,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_I2C1_Init();
-  MX_I2C2_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
@@ -247,10 +196,24 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM7_Init();
   MX_TIM6_Init();
+  MX_TIM4_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
+
+
+
   HAL_UART_Receive_IT(&huart1, uartRxBuffer, UART_RX_BUFFER_SIZE);
   HAL_Delay(1);
   shellInit();
+
+  HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE);
+  HAL_Delay(1);
+
+  int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
+  TestSensorOnI2C(tabI2CAdd);
+  initTof();
+  //int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
+  //TestSensorOnI2C(tabI2CAdd);
 
   TurnOffLed(1);
   TurnOffLed(2);
@@ -271,102 +234,10 @@ int main(void)
   PIController_Init(&MoteurG);
 
   HAL_TIM_Base_Start_IT(&htim7); //interrupt chaque second pour print les données dans le shell
-
-  initTof();
-
-
-
-
-  /* Create the task, storing the handle. */
-  /*
-  printf("1 \r\n");
-  xReturned_Encoder = xTaskCreate(
-		  GetEncoderValue, 				// Function that implements the task.
-		  "Encodeur", 					// Text name for the task.
-		  STACK_SIZE, 					// Stack size in words, not bytes.
-		  (void *) DELAY_1, 			// Parameter passed into the task.
-		  PRIORITY_ENCODER,				// Priority at which the task is created.
-		  &xHandle_Encoder ); 			// Used to pass out the created task's handle.
-
-  if (xReturned_Encoder == pdPASS ){
-	  printf("Task GetEncoderValue created \r\n");
-  } else{
-		printf("ERROR GetEncoderValue not created \r\n");
-		while(1){}
-  }
-
-*/
-
-  /*
-  printf("2 \r\n");
-  xReturned_TofGetDistance = xTaskCreate(
-		  TofGetDistance, 				// Function that implements the task.
-		  "TOF", 						// Text name for the task.
-		  STACK_SIZE, 					// Stack size in words, not bytes.
-		  (void *) DELAY_2, 			// Parameter passed into the task.
-		  PRIORITY_TOF,					// Priority at which the task is created.
-		  &xHandle_TofGetDistance );	// Used to pass out the created task's handle.
-
-  if(xReturned_TofGetDistance == pdPASS){
-	  printf("Task TofGetDistance created \r\n");
-  } else{
-	printf("ERROR TofGetDistance NOT created \r\n");
-	while(1){}
-  }
-*/
-
-
-/*
-  xReturned_ControlServo = xTaskCreate(
-		  ControlServo, 				// Function that implements the task.
-		  "ServoMotor", 						// Text name for the task.
-		  STACK_SIZE, 					// Stack size in words, not bytes.
-		  (int *) servo_angle, 			// Parameter passed into the task.
-		  PRIORITY_SERVO,					// Priority at which the task is created.
-		  &xHandle_ControlServo );	// Used to pass out the created task's handle.
-
-  if(xReturned_ControlServo == pdPASS){
-	  printf("Task ControlServo created \r\n");
-  } else{
-	printf("ERROR ControlServo NOT created \r\n");
-	while(1){}
-  }
- */
-
-/*
-  semaphoreRASP = xSemaphoreCreateBinary();
-  xSemaphoreGive(semaphoreRASP);
-
-  printf("3 \r\n");
-  xReturned_RASP = xTaskCreate(
-		  RaspRead, 					// Function that implements the task.
-		  "Raspberry", 					// Text name for the task.
-		  STACK_SIZE, 					// Stack size in words, not bytes.
-		  (void *) DELAY_3, 			// Parameter passed into the task.
-		  PRIORITY_RASP,				// Priority at which the task is created.
-		  &xHandle_RASP ); 				// Used to pass out the created task's handle.
-
-  if (xReturned_RASP == pdPASS ){
-	  printf("Task RaspRead created \r\n");
-  } else{
-		printf("ERROR RaspRead not created \r\n");
-		while(1){}
-  }
-
-
-
-  vTaskStartScheduler();
-*/
+  HAL_TIM_Base_Start_IT(&htim4);
 
   /* USER CODE END 2 */
 
-  /* Call init function for freertos objects (in freertos.c) */
-  //MX_FREERTOS_Init();
-
-  /* Start scheduler */
-  //osKernelStart();
-
-  /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -452,11 +323,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
 		//printf("%d\r\n", dist);
+		printf("ali petit zizi ca rime...je dis ca je dis rien\r\n");
 		TOF_dist = tofReadDistance();//scan
 		printf("distance : %d\r\n", TOF_dist);
 	}
 
-
+	else if (htim->Instance == TIM4) //Delay Tof
+		{
+		}
 
 	else if (htim->Instance == TIM6) //Tim 6 asserv en vitesse a 0.1sec
 		{
@@ -544,7 +418,11 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 	}
 	else if(huart->Instance == USART2)
 	{
-		//interruption Raspberry
+		HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE);
+		if(raspGetChar())
+		{
+			raspExec();
+		}
 	}
 }
 /* USER CODE END 4 */

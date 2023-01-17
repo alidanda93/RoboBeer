@@ -80,10 +80,10 @@ void Error_Handler(void);
 #define BDT_3_GPIO_Port GPIOB
 #define BDT_4_Pin GPIO_PIN_1
 #define BDT_4_GPIO_Port GPIOB
-#define COLOR_I2C_SCL_Pin GPIO_PIN_10
-#define COLOR_I2C_SCL_GPIO_Port GPIOB
-#define COLOR_I2C_SDA_Pin GPIO_PIN_11
-#define COLOR_I2C_SDA_GPIO_Port GPIOB
+#define TOF_SCL_Pin GPIO_PIN_10
+#define TOF_SCL_GPIO_Port GPIOB
+#define TOF_SDA_Pin GPIO_PIN_11
+#define TOF_SDA_GPIO_Port GPIOB
 #define LED_1_Pin GPIO_PIN_12
 #define LED_1_GPIO_Port GPIOB
 #define LED_2_Pin GPIO_PIN_13
@@ -114,10 +114,6 @@ void Error_Handler(void);
 #define STLINK_USART1_TX_GPIO_Port GPIOB
 #define STLINK_USART1_RX_Pin GPIO_PIN_7
 #define STLINK_USART1_RX_GPIO_Port GPIOB
-#define TOF_I2C_SCL_Pin GPIO_PIN_8
-#define TOF_I2C_SCL_GPIO_Port GPIOB
-#define TOF_I2C_SDA_Pin GPIO_PIN_9
-#define TOF_I2C_SDA_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 #define STACK_SIZE 1000

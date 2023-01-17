@@ -15,6 +15,7 @@
 
 #define CMD_BUFFER_SIZE 64
 #define MAX_ARGS 9
+
 // LF = line feed, saut de ligne
 #define ASCII_LF 0x0A
 // CR = carriage return, retour chariot

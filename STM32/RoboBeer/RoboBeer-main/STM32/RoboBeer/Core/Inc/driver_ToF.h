@@ -24,8 +24,6 @@
 
 #include "stm32f1xx_hal.h"
 #include "main.h"
-#include "i2c.h"
-
 #define ToF_Device_Address 0x52
 extern I2C_HandleTypeDef hi2c2;
 

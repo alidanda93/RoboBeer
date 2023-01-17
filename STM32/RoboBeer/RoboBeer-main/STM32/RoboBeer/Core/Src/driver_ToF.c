@@ -30,7 +30,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
-#include "cmsis_os.h"
 #include "driver_ToF.h"
 
 //#include <sys/ioctl.h>
@@ -122,8 +121,8 @@ static unsigned short readReg16(uint8_t ucAddr)
 {
 	uint8_t ucTemp[2];
 
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, &ucAddr, 1, 1000);
-	HAL_I2C_Master_Receive(&hi2c1, ToF_Device_Address + 1, ucTemp, 2, 1000);
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, &ucAddr, 1, 1000);
+	HAL_I2C_Master_Receive(&hi2c2, ToF_Device_Address + 1, ucTemp, 2, 1000);
 
 	return (unsigned short)((ucTemp[0]<<8) + ucTemp[1]);
 } /* readReg16() */
@@ -135,16 +134,15 @@ static unsigned char readReg(uint8_t ucAddr)
 {
 	uint8_t ucTemp;
 
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, &ucAddr, 1, 1000);
-	HAL_I2C_Master_Receive(&hi2c1, ToF_Device_Address + 1, &ucTemp, 1, 1000);
-
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, &ucAddr, 1, 1000);
+	HAL_I2C_Master_Receive(&hi2c2, ToF_Device_Address + 1, &ucTemp, 1, 1000);
 	return ucTemp;
 } /* ReadReg() */
 
 static void readMulti(uint8_t ucAddr, uint8_t *pBuf, uint16_t iCount)
 {
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, &ucAddr, 1, 1000);
-	HAL_I2C_Master_Receive(&hi2c1, ToF_Device_Address + 1, pBuf, iCount, 1000);
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, &ucAddr, 1, 1000);
+	HAL_I2C_Master_Receive(&hi2c2, ToF_Device_Address + 1, pBuf, iCount, 1000);
 } /* readMulti() */
 
 static void writeMulti(uint8_t ucAddr, uint8_t *pBuf, uint16_t iCount)
@@ -153,7 +151,7 @@ static void writeMulti(uint8_t ucAddr, uint8_t *pBuf, uint16_t iCount)
 
 	ucTemp[0] = ucAddr;
 	memcpy(&ucTemp[1], pBuf, iCount);
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, ucTemp, iCount+1, 1000);
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, ucTemp, iCount+1, 1000);
 } /* writeMulti() */
 //
 // Write a 16-bit value to a register
@@ -165,7 +163,7 @@ static void writeReg16(uint8_t ucAddr, uint16_t usValue)
 	ucTemp[0] = ucAddr;
 	ucTemp[1] = (uint8_t)(usValue >> 8); // MSB first
 	ucTemp[2] = (uint8_t)usValue;
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, ucTemp, 3, 1000);
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, ucTemp, 3, 1000);
 } /* writeReg16() */
 //
 // Write a single register/value pair
@@ -176,7 +174,7 @@ static void writeReg(uint8_t ucAddr, uint8_t ucValue)
 
 	ucTemp[0] = ucAddr;
 	ucTemp[1] = ucValue;
-	HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, ucTemp, 2, 1000);
+	HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, ucTemp, 2, 1000);
 } /* writeReg() */
 
 //
@@ -189,7 +187,7 @@ static void writeRegList(uint8_t *ucList)
 
 	while (ucCount)
 	{
-		HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, ucList, 2, 1000);
+		HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, ucList, 2, 1000);
 		ucList += 2;
 		ucCount--;
 	}
@@ -760,22 +758,23 @@ uint16_t range;
   while ((readReg(RESULT_INTERRUPT_STATUS) & 0x07) == 0)
   {
 
-	/*
-    iTimeout++;
+
+    /*iTimeout++;
     HAL_Delay(5);//usleep(5000);
     if (iTimeout > 50)
     {
       return -1;
-    }
-    */
-    if(!TIM_SR_CC1IF){
+    }*/
+
+    if(!TIM_SR_CC1IF)
+    {
     	    RB_Delay(5);
     	    iTimeout++;
     	    if (iTimeout > 50)
     	    {
     	      return -1;
     	    }
-    	}
+    }
 
   }
 
@@ -839,15 +838,15 @@ int tofGetModel(int *model, int *revision)
 	if (model)
 	{
 		ucAddr = REG_IDENTIFICATION_MODEL_ID;
-		HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, &ucAddr, 1, 1000);
-		HAL_I2C_Master_Receive(&hi2c1, ToF_Device_Address + 1, &ucTemp, 1, 1000);
+		HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, &ucAddr, 1, 1000);
+		HAL_I2C_Master_Receive(&hi2c2, ToF_Device_Address + 1, &ucTemp, 1, 1000);
 		*model = ucTemp;
 	}
 	if (revision)
 	{
 		ucAddr = REG_IDENTIFICATION_REVISION_ID;
-		HAL_I2C_Master_Transmit(&hi2c1, ToF_Device_Address, &ucAddr, 1, 1000);
-		HAL_I2C_Master_Receive(&hi2c1, ToF_Device_Address + 1, &ucTemp, 1, 1000);
+		HAL_I2C_Master_Transmit(&hi2c2, ToF_Device_Address, &ucAddr, 1, 1000);
+		HAL_I2C_Master_Receive(&hi2c2, ToF_Device_Address + 1, &ucTemp, 1, 1000);
 		*revision = ucTemp;
 	}
 	return 1;
@@ -855,21 +854,7 @@ int tofGetModel(int *model, int *revision)
 } /* tofGetModel() */
 
 
-/*
- * driver_ToF.c
- *
- *  Created on: Nov 23, 2022
- *      Author: ludov
- *
- *
- */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
-#include <fcntl.h>
 
 /**
  * @brief Returns the distance in mm as a global variable
@@ -889,16 +874,16 @@ int initTof()
 	HAL_GPIO_WritePin(TOF_XSHUT_GPIO_Port, TOF_XSHUT_Pin, SET);
 	while(I2C2->CR2==2)
 		{
-		  while(HAL_I2C_DeInit(&hi2c1) != HAL_OK);
-		  while(HAL_I2C_Init(&hi2c1) != HAL_OK);
+		  while(HAL_I2C_DeInit(&hi2c2) != HAL_OK);
+		  while(HAL_I2C_Init(&hi2c2) != HAL_OK);
 		}
 
 	tofInit(1); // set long range mode (up to 2m)
 	tofGetModel(&model, &revision);
 	while(model != 238 || revision != 16) //initialise le ToF
 	{
-	while(HAL_I2C_DeInit(&hi2c1) != HAL_OK);
-	while(HAL_I2C_Init(&hi2c1) != HAL_OK);
+	while(HAL_I2C_DeInit(&hi2c2) != HAL_OK);
+	while(HAL_I2C_Init(&hi2c2) != HAL_OK);
 	tofInit(1); // set long range mode (up to 2m)
 	tofGetModel(&model, &revision);
 	}
@@ -912,8 +897,9 @@ int TofShutdown(void)
 }
 
 void RB_Delay(int ms){
-	TIM2->CNT = 0;
-	TIM2->CCR1 = 170000*ms;
+	//TIM4->CNT = 0;
+	//TIM4->CCR1 = 10*ms;
+	//TIM4->PSC = 7500;
 }
 
 
