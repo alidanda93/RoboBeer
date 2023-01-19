@@ -8,6 +8,7 @@
 
 #include "MCC.h"
 #include "servo.h"
+#include "Test.h"
 
 extern int dist;
 
@@ -27,8 +28,10 @@ int start = 0;
 
 #define DIST 3000
 #define DELAY 1000
-#define OFFSET_OUVERTURE_PINCE 1150
+#define OFFSET_OUVERTURE_PINCE 80
+#define TOF_DEVANT_CANNETTE_VALUE 250
 #define MM2TICK 5//convert distance in mm in encoder tick variable (d=2.pi.(75/2)=235.6 et inc = 16*75 = 1200 ==> 1200/235.6 = 5
+#define TOF_SEUIL 1000
 
 void Debut_Test()
 {
@@ -149,7 +152,7 @@ void Test_Tourner()
 	consigneD = 200;	//vitesse
 	consigneG = 200;	//vitesse
 	action = TOURNER;
-	while(dist < 2*TOUR)
+	while(dist < TOUR)
 	{
 	}
 	action =  STOP;
@@ -184,23 +187,26 @@ void Test_Canette()
 	consigneG = 200;	//vitesse
 	action = TOURNER;
 	dist = 0;
-	while( TOF_dist == 0 || (dist > TOUR))
+	while( (TOF_dist > TOF_SEUIL) && (dist < TOUR)) //seuil de detection à TOF_SEUIL mm
 	{
 	}
 	action =  STOP;
 	HAL_Delay(DELAY);
 	if(dist > TOUR) Error_Handler(); 	//Systeme en default cannette non vue
 	angle = dist; 						//on memorise la valeur de l'angle parcouru
-	dist_cannette = TOF_dist * MM2TICK;	//on memorise la distance à parcourir en tick
 
 
 	/* Avancer tout droit + mesure distance jusqu'à TOF = 0*/
 	action =  AVANCER;
 	dist = 0;
-	while(dist < dist_cannette - OFFSET_OUVERTURE_PINCE)
+	/*while(dist < dist_cannette - OFFSET_OUVERTURE_PINCE)
+	{
+	}*/
+	while(TOF_dist > TOF_DEVANT_CANNETTE_VALUE) //tant qu'on est pas face a la canette
 	{
 	}
 	action =  STOP;
+	dist_cannette = dist;
 	dist = 0;
 	HAL_Delay(DELAY);
 
@@ -229,12 +235,13 @@ void Test_Canette()
 	}
 	action =  STOP;
 	dist = 0;
+	HAL_Delay(DELAY);
 
 	/* Avancer valeur dist mesuree */
 
 	action =  AVANCER;
 	dist = 0;
-	while(dist < dist_cannette)
+	while(dist < dist_cannette+OFFSET_OUVERTURE_PINCE)
 	{
 	}
 	action =  STOP;
@@ -280,6 +287,7 @@ void Test_Canette()
 
 	sens = 0;
 	action = TOURNER;
+	dist = 0;
 	while(dist < TOUR/2)
 	{
 	}

@@ -108,6 +108,7 @@ void Error_Handler(void);
 #define MOTOR_1_ENCODER_B_GPIO_Port GPIOB
 #define TOF_Interrupt_Pin GPIO_PIN_4
 #define TOF_Interrupt_GPIO_Port GPIOB
+#define TOF_Interrupt_EXTI_IRQn EXTI4_IRQn
 #define TOF_XSHUT_Pin GPIO_PIN_5
 #define TOF_XSHUT_GPIO_Port GPIOB
 #define STLINK_USART1_TX_Pin GPIO_PIN_6

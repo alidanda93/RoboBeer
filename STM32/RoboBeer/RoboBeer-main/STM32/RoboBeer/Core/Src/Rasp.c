@@ -35,7 +35,6 @@ uint8_t raspGetChar(void)
 	uint8_t newCmdReady = 0;
 	char* token;
 
-	HAL_UART_Transmit(&huart1, uartRxBufferRasp, 1, HAL_MAX_DELAY);
 	HAL_UART_Transmit(&huart1, uartRxBufferRasp, NB_CARACT, HAL_MAX_DELAY); //ecrit à l'ordi
 	HAL_UART_Transmit(&huart1, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
 

@@ -6,24 +6,30 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="TOF_SEUIL"/>
 		<list key="findhistory">
-			<item value="I2C2"/>
-			<item value="hi2c2"/>
+			<item value="TOF_MAX_VALUE"/>
+			<item value="RB_Delay"/>
+			<item value="newline"/>
+			<item value="argv"/>
+			<item value="argc"/>
+			<item value="idxCmd"/>
 			<item value="hi2c1"/>
+			<item value="hi2c2"/>
+			<item value="I2C2"/>
 			<item value="i2c"/>
 			<item value="HAL_Delay"/>
-			<item value="RB_Delay"/>
 			<item value="RBDelay"/>
 			<item value="tofReadDistance"/>
 			<item value="rb_delay"/>
 			<item value="TofGetDistance"/>
-			<item value="initTof"/>
-			<item value="ToF_Enable_XSHUT"/>
-			<item value="ToF_XSHUT"/>
-			<item value="ToF_"/>
 		</list>
 		<list key="replacehistory">
+			<item value="TOF_SEUIL"/>
+			<item value="newlineRasp"/>
+			<item value="argvRasp"/>
+			<item value="argcRasp"/>
+			<item value="idxCmdRasp"/>
 			<item value="hi2c2"/>
 			<item value="hi2c1"/>
 			<item value="TOF_XSHUT"/>

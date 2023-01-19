@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -98,6 +99,10 @@ int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
 int sens = 0;
 int couleur = 0;
 extern int start;
+
+#define nb_mesure 5
+int TOF_tab[nb_mesure];
+uint tab_i=0;
 
 int TOF_dist = 0;
 
@@ -187,6 +192,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM3_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
@@ -206,11 +212,13 @@ int main(void)
   HAL_Delay(1);
   shellInit();
 
-  HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
-  HAL_Delay(1);
+  HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 
-  //int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
-  //TestSensorOnI2C(tabI2CAdd);
+  //HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+  //HAL_Delay(1);
+
+  int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
+  TestSensorOnI2C(tabI2CAdd);
   initTof();
   //int tabI2CAdd[8] = {0,0,0,0,0,0,0,0};
   //TestSensorOnI2C(tabI2CAdd);
@@ -247,11 +255,11 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if(start)
 	  {
+		  Test_Canette();
+		  //Test_Tourner();
 		  //Test_Odometrie_Carre();
 	  }
-
-
-
+	  //printf("start\r\n");
 
 
 
@@ -315,7 +323,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim->Instance == TIM3) // 50Hz freq lecture TOF
 	{
-		//TOF_dist = tofReadDistance();//scan
+
+
 	}
 
 
@@ -323,13 +332,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
 		//printf("%d\r\n", dist);
-		//printf("ali petit zizi ca rime...je dis ca je dis rien\r\n");
-		//TOF_dist = tofReadDistance();//scan
 		//printf("distance : %d\r\n", TOF_dist);
 	}
-
 	else if (htim->Instance == TIM4) //Delay Tof
 		{
+			TOF_tab[tab_i] = tofReadDistance();
+			tab_i = (tab_i+1)%nb_mesure;
+			if(tab_i==10000) tab_i = 0;
+			int d_moy = 0;
+			for(int i=0; i<nb_mesure; i++)
+			{
+				d_moy += TOF_tab[i];
+			}
+			TOF_dist = d_moy/nb_mesure;
+
+			printf("distance : %d\r\n", TOF_dist);
 		}
 
 	else if (htim->Instance == TIM6) //Tim 6 asserv en vitesse a 0.1sec
@@ -418,10 +435,12 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 	}
 	else if(huart->Instance == USART2)
 	{
-		HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+		//HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+		HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 		raspGetChar();
 		raspExec();
 	}
+
 }
 /* USER CODE END 4 */
 
