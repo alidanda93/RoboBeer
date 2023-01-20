@@ -13,10 +13,10 @@
 
 
 #define CMD_BUFFER_SIZE 64
-#define NB_CARACT 16
+#define NB_CARACT 14
 #define MAX_ARGS 9
 
-uint8_t raspGetChar(void);
+void raspGetChar(void);
 void raspErrorReceive(void);
 void raspExec(void);
 

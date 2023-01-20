@@ -82,22 +82,13 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     __HAL_RCC_ADC1_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
     /**ADC1 GPIO Configuration
     PA4     ------> ADC1_IN4
     PA5     ------> ADC1_IN5
-    PA6     ------> ADC1_IN6
-    PA7     ------> ADC1_IN7
-    PB0     ------> ADC1_IN8
-    PB1     ------> ADC1_IN9
     */
-    GPIO_InitStruct.Pin = MOTOR_1_ADC1_CURRENT_SENSOR_Pin|MOTOR_2_ADC1_CURRENT_SENSOR_Pin|BDT_1_Pin|BDT_2_Pin;
+    GPIO_InitStruct.Pin = MOTOR_1_ADC1_CURRENT_SENSOR_Pin|MOTOR_2_ADC1_CURRENT_SENSOR_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = BDT_3_Pin|BDT_4_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN ADC1_MspInit 1 */
 
@@ -119,14 +110,8 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
     /**ADC1 GPIO Configuration
     PA4     ------> ADC1_IN4
     PA5     ------> ADC1_IN5
-    PA6     ------> ADC1_IN6
-    PA7     ------> ADC1_IN7
-    PB0     ------> ADC1_IN8
-    PB1     ------> ADC1_IN9
     */
-    HAL_GPIO_DeInit(GPIOA, MOTOR_1_ADC1_CURRENT_SENSOR_Pin|MOTOR_2_ADC1_CURRENT_SENSOR_Pin|BDT_1_Pin|BDT_2_Pin);
-
-    HAL_GPIO_DeInit(GPIOB, BDT_3_Pin|BDT_4_Pin);
+    HAL_GPIO_DeInit(GPIOA, MOTOR_1_ADC1_CURRENT_SENSOR_Pin|MOTOR_2_ADC1_CURRENT_SENSOR_Pin);
 
   /* USER CODE BEGIN ADC1_MspDeInit 1 */
 

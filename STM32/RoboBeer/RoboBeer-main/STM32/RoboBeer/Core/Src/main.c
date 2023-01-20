@@ -88,16 +88,23 @@ extern uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
 
 uint16_t servo_angle=0;
 
-uint16_t dist = 0;
-int X_odo = 0;
-int Y_odo = 0;
+uint16_t dist = 0;		//distance parcourue mesuree par les encodeurs
+
 int tickD = 0;
-int consigneD = 0;
+int consigneD = 0;		//consigne de vitesse entre 0 et 200
 int tickG = 0;
 int consigneG = 0;
+
+
 int action = 3; 		//mouvement à realiser (avancer tourner reculer stop)
 int sens = 0;
+
+int actionRasp = 3;
+int sensRasp = 0;
 int couleur = 0;
+int enable = 0; 		//detection canette par la raspebrry, permet de savoir si on peut utiliser les données transmises
+int emergencySTOP = 0;
+
 extern int start;
 
 #define nb_mesure 5
@@ -212,7 +219,7 @@ int main(void)
   HAL_Delay(1);
   shellInit();
 
-  HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+  HAL_UART_Receive_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 
   //HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
   //HAL_Delay(1);
@@ -255,7 +262,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if(start)
 	  {
-		  Test_Canette();
+		  Test_Rasp();
+		  //Test_Canette();
 		  //Test_Tourner();
 		  //Test_Odometrie_Carre();
 	  }
@@ -346,76 +354,93 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			}
 			TOF_dist = d_moy/nb_mesure;
 
-			printf("distance : %d\r\n", TOF_dist);
+			//printf("distance : %d\r\n", TOF_dist);
 		}
 
 	else if (htim->Instance == TIM6) //Tim 6 asserv en vitesse a 0.1sec
 		{
 
-		switch(action)
+		if(emergencySTOP)
+			{
+			action = STOP;
+			Error_Handler();
+			}
+		else
 		{
-		case TOURNER :
-			if(sens)dist -=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
-			else dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
-			break;
-		default :
-			dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ( Mid_Period_TIM5 - (TIM5->CNT)) ) / 2; //on moyenne la valeur
-			break;
-		}
-
-		  ReadEncodeur();
-
-		  if(consigneD == 0)
-		  {
-			  Stop();
-		  }
-
-		  else
-		  {
 			switch(action)
 			{
-			case AVANCER :
-				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-				AvancerPI(0, MoteurD.out);
-				AvancerPI(1, MoteurG.out);
-				break;
-
-			case RECULER :
-				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-				ReculerPI(0, MoteurD.out);
-				ReculerPI(1, MoteurG.out);
-				break;
-
 			case TOURNER :
-				PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
-				PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
-				if(sens)
-				{
-					ReculerPI(0, MoteurD.out);
-					AvancerPI(1, MoteurG.out);
-				}
-				else
-				{
-					AvancerPI(0, MoteurD.out);
-					ReculerPI(1, MoteurG.out);
-				}
+				if(sens)dist -=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
+				else dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ((TIM5->CNT) - Mid_Period_TIM5 ) ) / 2; //on moyenne la valeur
 				break;
-
 			default :
-				Stop();
+				dist +=	(( (TIM2->CNT)-Mid_Period_TIM2 ) + ( Mid_Period_TIM5 - (TIM5->CNT)) ) / 2; //on moyenne la valeur
 				break;
 			}
 
-		  }
+			  ReadEncodeur();
+
+			  if(consigneD == 0)
+			  {
+				  Stop();
+			  }
+
+			  else
+			  {
+				switch(action)
+				{
+				case AVANCER :
+					PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+					PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+					AvancerPI(0, MoteurD.out);
+					AvancerPI(1, MoteurG.out);
+					break;
+
+				case RECULER :
+					PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+					PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+					ReculerPI(0, MoteurD.out);
+					ReculerPI(1, MoteurG.out);
+					break;
+
+				case TOURNER :
+					PIController_Update(&MoteurD, consigneD, tickD * MAX_ARR / OmaxD);
+					PIController_Update(&MoteurG, consigneG, tickG * MAX_ARR / OmaxG);
+					if(sens)
+					{
+						ReculerPI(0, MoteurD.out);
+						AvancerPI(1, MoteurG.out);
+					}
+					else
+					{
+						AvancerPI(0, MoteurD.out);
+						ReculerPI(1, MoteurG.out);
+					}
+					break;
+
+				default :
+					Stop();
+					break;
+				}
+
+			  }
+			}
 		}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're Looking For!
 {
 	//enableUserButton = (enableUserButton+1) % 2; //passe 0 à 1 et 1 à 0
-	Debut_Test();
+	if(GPIO_Pin == USER_BTN_Pin)
+	{
+		Debut_Test();
+	}
+	else if (GPIO_Pin == BDT1_Pin || GPIO_Pin == BDT2_Pin || GPIO_Pin == BDT3_Pin || GPIO_Pin == BDT4_Pin)
+	{
+		SwitchLed(2);
+		emergencySTOP = 1;
+	}
+
 }
 
 /**
@@ -436,7 +461,7 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 	else if(huart->Instance == USART2)
 	{
 		//HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
-		HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
+		HAL_UART_Receive_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 		raspGetChar();
 		raspExec();
 	}

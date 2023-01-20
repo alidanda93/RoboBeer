@@ -12,10 +12,10 @@
 #include "usart.h"
 
 
-extern int action; 		//mouvement à realiser (avancer tourner reculer stop)
-extern int sens;
+extern int enable;
+extern int actionRasp; 		//mouvement à realiser (avancer tourner reculer stop)
+extern int sensRasp;
 extern int couleur;
-extern int TOF_dist;
 
 
 
@@ -28,20 +28,18 @@ char* argvRasp[MAX_ARGS];
 uint8_t	argcRasp;
 extern uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
 extern uint8_t stringSizeRasp;
+int bits[8] = {0};
 
-
-uint8_t raspGetChar(void)
+void raspGetChar(void)
 {
-	uint8_t newCmdReady = 0;
-	char* token;
 
 	HAL_UART_Transmit(&huart1, uartRxBufferRasp, NB_CARACT, HAL_MAX_DELAY); //ecrit à l'ordi
 	HAL_UART_Transmit(&huart1, newlineRasp, sizeof(newlineRasp), HAL_MAX_DELAY);
 
+	char* token;
 
 	argcRasp = 0;
-
-	for(int i = 0; i < NB_CARACT; i++)
+	for(int i = 0; i < UART_RX_BUFFER_SIZE_RASP; i++)
 	{
 		cmdBufferRasp[i] = uartRxBufferRasp[i];
 	}
@@ -53,9 +51,9 @@ uint8_t raspGetChar(void)
 		token = (char*)strtok(NULL, " ");
 	}
 
-
-	return newCmdReady;
 }
+
+
 
 void raspErrorReceive(void)
 {
@@ -71,11 +69,11 @@ void raspExec(void)
 {
 	if(strcmp(argvRasp[0],"FM")==0 && strcmp(argvRasp[5],"RT")==0)
 	{
-		action = atoi(argvRasp[1]);
-		sens = atoi(argvRasp[2]);
-		couleur = atoi(argvRasp[3]);
-		TOF_dist = atoi(argvRasp[4]);
-		//printf("%d %d %d %d\r\n", action, sens, couleur, TOF_dist);
+		enable = atoi(argvRasp[1]);
+		actionRasp = atoi(argvRasp[2]);
+		sensRasp = atoi(argvRasp[3]);
+		couleur = atoi(argvRasp[4]);
+		printf("%d %d %d %d\r\n", enable, actionRasp, sensRasp, couleur);
 	}
 
 	else{

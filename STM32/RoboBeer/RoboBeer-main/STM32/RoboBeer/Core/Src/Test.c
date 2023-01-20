@@ -12,9 +12,6 @@
 
 extern int dist;
 
-extern int X_odo;
-extern int Y_odo;
-
 extern int tickD;
 extern int consigneD;
 extern int tickG;
@@ -30,14 +27,11 @@ int start = 0;
 #define DELAY 1000
 #define OFFSET_OUVERTURE_PINCE 80
 #define TOF_DEVANT_CANNETTE_VALUE 250
-#define MM2TICK 5//convert distance in mm in encoder tick variable (d=2.pi.(75/2)=235.6 et inc = 16*75 = 1200 ==> 1200/235.6 = 5
 #define TOF_SEUIL 1000
 
 void Debut_Test()
 {
 	start = (start+1)%2;
-	X_odo = 0;
-	Y_odo = 0;
 	dist = 0;
 }
 
@@ -304,5 +298,11 @@ void Test_Canette()
 	HAL_Delay(DELAY);
 
 	while(1){}
+
+}
+
+
+void Test_Rasp()
+{
 
 }
