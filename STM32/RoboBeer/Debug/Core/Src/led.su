@@ -1,4 +1,0 @@
-../Core/Src/led.c:12:6:TurnOnLed	16	static
-../Core/Src/led.c:34:6:TurnOffLed	16	static
-../Core/Src/led.c:56:6:SwitchLed	16	static
-../Core/Src/led.c:78:6:LedError	8	static

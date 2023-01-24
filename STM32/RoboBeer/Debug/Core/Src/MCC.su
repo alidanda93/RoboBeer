@@ -1,8 +1,0 @@
-../Core/Src/MCC.c:17:6:InitMCC	8	static
-../Core/Src/MCC.c:26:6:Avancer	16	static
-../Core/Src/MCC.c:36:6:AvancerPI	16	static
-../Core/Src/MCC.c:51:6:Reculer	16	static
-../Core/Src/MCC.c:60:6:ReculerPI	16	static
-../Core/Src/MCC.c:75:6:Stop	4	static
-../Core/Src/MCC.c:85:6:Tourner	16	static
-../Core/Src/MCC.c:107:6:ReadEncodeur	4	static

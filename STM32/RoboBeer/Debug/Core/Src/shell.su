@@ -1,5 +1,0 @@
-../Core/Src/shell.c:80:6:shellInit	8	static
-../Core/Src/shell.c:89:6:shellPrompt	8	static
-../Core/Src/shell.c:97:6:shellCmdNotFound	8	static
-../Core/Src/shell.c:105:9:shellGetChar	16	static
-../Core/Src/shell.c:142:6:shellExec	16	static
