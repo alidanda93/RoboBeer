@@ -1,0 +1,129 @@
+\hypertarget{_rasp_8c}{}\doxysection{Rasp.\+c File Reference}
+\label{_rasp_8c}\index{Rasp.c@{Rasp.c}}
+
+
+\+: lib uses to communicate in UART with Raspberry  
+
+
+{\ttfamily \#include \char`\"{}Rasp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}usart.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_rasp_8c_add53a31c3becd2f085d2fe95b051e816}{rasp\+Get\+Char}} (void)
+\begin{DoxyCompactList}\small\item\em Fonction qui recupère les données recues et les segmentes dans une liste avec comme separateur \char`\"{} \char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_rasp_8c_ac406035c614984443ae9c51e2e173138}{rasp\+Error\+Receive}} (void)
+\begin{DoxyCompactList}\small\item\em Fonction qui ecrit dans l\textquotesingle{}uart1 un message d\textquotesingle{}erreur si la tram lue est fausse. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_rasp_8c_aae9f25fc17bb624da10b75f0b01453d4}{rasp\+Exec}} (void)
+\begin{DoxyCompactList}\small\item\em Call function depends of the value of argc\+Rasp and argv\+Rasp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a4f2504e3cd237cbe4ee10255c7855e63}\label{_rasp_8c_a4f2504e3cd237cbe4ee10255c7855e63}} 
+int {\bfseries enable}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a7ce9a8e7b0fbf103c6e4814d357329e4}\label{_rasp_8c_a7ce9a8e7b0fbf103c6e4814d357329e4}} 
+int {\bfseries action\+Rasp}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a33b55682fb8b82e5f968987fd74eb4e5}\label{_rasp_8c_a33b55682fb8b82e5f968987fd74eb4e5}} 
+int {\bfseries sens\+Rasp}
+\item 
+\mbox{\Hypertarget{_rasp_8c_aae3213d24c3650d6836b74cfef8b9074}\label{_rasp_8c_aae3213d24c3650d6836b74cfef8b9074}} 
+int {\bfseries couleur}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a002bd061b229be38f899f5e1131db790}\label{_rasp_8c_a002bd061b229be38f899f5e1131db790}} 
+uint8\+\_\+t {\bfseries errlect} \mbox{[}$\,$\mbox{]} =\char`\"{}erreur lecture tram donnee\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+\mbox{\Hypertarget{_rasp_8c_aa63dcc9fc9c2649a4937be5690f2d9aa}\label{_rasp_8c_aa63dcc9fc9c2649a4937be5690f2d9aa}} 
+uint8\+\_\+t {\bfseries newline\+Rasp} \mbox{[}$\,$\mbox{]} =\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a57af4881bf156f5fc3f792046dd426a0}\label{_rasp_8c_a57af4881bf156f5fc3f792046dd426a0}} 
+char {\bfseries cmd\+Buffer\+Rasp} \mbox{[}CMD\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a02e261f1bd93fe33bad9c748510c29ed}\label{_rasp_8c_a02e261f1bd93fe33bad9c748510c29ed}} 
+uint8\+\_\+t {\bfseries uart\+Rx\+Buffer\+Rasp} \mbox{[}UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a8d74cc2ecabad1ded800552b4b7ffd06}\label{_rasp_8c_a8d74cc2ecabad1ded800552b4b7ffd06}} 
+char $\ast$ {\bfseries argv\+Rasp} \mbox{[}MAX\+\_\+\+ARGS\mbox{]}
+\item 
+\mbox{\Hypertarget{_rasp_8c_af10d8d3e39485209483d851931a68e75}\label{_rasp_8c_af10d8d3e39485209483d851931a68e75}} 
+uint8\+\_\+t {\bfseries argc\+Rasp}
+\item 
+\mbox{\Hypertarget{_rasp_8c_aed6f2f7d5d812b6a1d0a6ce7e8793b36}\label{_rasp_8c_aed6f2f7d5d812b6a1d0a6ce7e8793b36}} 
+uint8\+\_\+t {\bfseries uart\+Tx\+Buffer\+Rasp} \mbox{[}UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a21db66b3f938ff10f8edd439f16f6ad8}\label{_rasp_8c_a21db66b3f938ff10f8edd439f16f6ad8}} 
+uint8\+\_\+t {\bfseries string\+Size\+Rasp}
+\item 
+\mbox{\Hypertarget{_rasp_8c_a6db899d2bd6b091bcea969b8b7b1f8b6}\label{_rasp_8c_a6db899d2bd6b091bcea969b8b7b1f8b6}} 
+int {\bfseries bits} \mbox{[}8\mbox{]} = \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: lib uses to communicate in UART with Raspberry 
+
+\begin{DoxyAuthor}{Author}
+\+: quenphil42 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_rasp_8c_ac406035c614984443ae9c51e2e173138}\label{_rasp_8c_ac406035c614984443ae9c51e2e173138}} 
+\index{Rasp.c@{Rasp.c}!raspErrorReceive@{raspErrorReceive}}
+\index{raspErrorReceive@{raspErrorReceive}!Rasp.c@{Rasp.c}}
+\doxysubsubsection{\texorpdfstring{raspErrorReceive()}{raspErrorReceive()}}
+{\footnotesize\ttfamily void rasp\+Error\+Receive (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui ecrit dans l\textquotesingle{}uart1 un message d\textquotesingle{}erreur si la tram lue est fausse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_rasp_8c_aae9f25fc17bb624da10b75f0b01453d4}\label{_rasp_8c_aae9f25fc17bb624da10b75f0b01453d4}} 
+\index{Rasp.c@{Rasp.c}!raspExec@{raspExec}}
+\index{raspExec@{raspExec}!Rasp.c@{Rasp.c}}
+\doxysubsubsection{\texorpdfstring{raspExec()}{raspExec()}}
+{\footnotesize\ttfamily void rasp\+Exec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Call function depends of the value of argc\+Rasp and argv\+Rasp. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_rasp_8c_add53a31c3becd2f085d2fe95b051e816}\label{_rasp_8c_add53a31c3becd2f085d2fe95b051e816}} 
+\index{Rasp.c@{Rasp.c}!raspGetChar@{raspGetChar}}
+\index{raspGetChar@{raspGetChar}!Rasp.c@{Rasp.c}}
+\doxysubsubsection{\texorpdfstring{raspGetChar()}{raspGetChar()}}
+{\footnotesize\ttfamily void rasp\+Get\+Char (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui recupère les données recues et les segmentes dans une liste avec comme separateur \char`\"{} \char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

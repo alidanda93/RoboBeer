@@ -1,0 +1,110 @@
+\hypertarget{led_8c}{}\doxysection{led.\+c File Reference}
+\label{led_8c}\index{led.c@{led.c}}
+
+
+\+: lib uses to command robobeer user\textquotesingle{}s leds  
+
+
+{\ttfamily \#include \char`\"{}led.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{led_8c_aaca1f415e7681e9c378fde3e469b6ad1}{Turn\+On\+Led}} (int i)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}activer la led i de la carte mere. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{led_8c_a1388561149fe0c9f0fbb32782c8fe8f6}{Turn\+Off\+Led}} (int i)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}eteindre la led i de la carte mere. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{led_8c_a48a8bbbec39383dc13ccfe66e7f7816c}{Switch\+Led}} (int i)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de changer l\textquotesingle{}etat de la led i de la carte mere. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{led_8c_a7dd1f26bafe3d64b38fc5894db0ccae2}{Led\+Error}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui allume toutes les leds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: lib uses to command robobeer user\textquotesingle{}s leds 
+
+\begin{DoxyAuthor}{Author}
+\+: quenphil42 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{led_8c_a7dd1f26bafe3d64b38fc5894db0ccae2}\label{led_8c_a7dd1f26bafe3d64b38fc5894db0ccae2}} 
+\index{led.c@{led.c}!LedError@{LedError}}
+\index{LedError@{LedError}!led.c@{led.c}}
+\doxysubsubsection{\texorpdfstring{LedError()}{LedError()}}
+{\footnotesize\ttfamily void Led\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui allume toutes les leds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{led_8c_a48a8bbbec39383dc13ccfe66e7f7816c}\label{led_8c_a48a8bbbec39383dc13ccfe66e7f7816c}} 
+\index{led.c@{led.c}!SwitchLed@{SwitchLed}}
+\index{SwitchLed@{SwitchLed}!led.c@{led.c}}
+\doxysubsubsection{\texorpdfstring{SwitchLed()}{SwitchLed()}}
+{\footnotesize\ttfamily void Switch\+Led (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de changer l\textquotesingle{}etat de la led i de la carte mere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entier} & allant de 1 à 4 indiquant le numero de la led qu\textquotesingle{}on souhaite allumer\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{led_8c_a1388561149fe0c9f0fbb32782c8fe8f6}\label{led_8c_a1388561149fe0c9f0fbb32782c8fe8f6}} 
+\index{led.c@{led.c}!TurnOffLed@{TurnOffLed}}
+\index{TurnOffLed@{TurnOffLed}!led.c@{led.c}}
+\doxysubsubsection{\texorpdfstring{TurnOffLed()}{TurnOffLed()}}
+{\footnotesize\ttfamily void Turn\+Off\+Led (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet d\textquotesingle{}eteindre la led i de la carte mere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entier} & allant de 1 à 4 indiquant le numero de la led qu\textquotesingle{}on souhaite allumer\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{led_8c_aaca1f415e7681e9c378fde3e469b6ad1}\label{led_8c_aaca1f415e7681e9c378fde3e469b6ad1}} 
+\index{led.c@{led.c}!TurnOnLed@{TurnOnLed}}
+\index{TurnOnLed@{TurnOnLed}!led.c@{led.c}}
+\doxysubsubsection{\texorpdfstring{TurnOnLed()}{TurnOnLed()}}
+{\footnotesize\ttfamily void Turn\+On\+Led (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet d\textquotesingle{}activer la led i de la carte mere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entier} & allant de 1 à 4 indiquant le numero de la led qu\textquotesingle{}on souhaite allumer\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

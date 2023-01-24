@@ -1,0 +1,263 @@
+\hypertarget{main_8c}{}\doxysection{main.\+c File Reference}
+\label{main_8c}\index{main.c@{main.c}}
+
+
+\+: Main program body  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}adc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dma.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}i2c.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tim.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}usart.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gpio.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}driver\+\_\+\+To\+F.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}led.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Servo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}MCC.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}PI.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}shell.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Test.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Rasp.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_a2713d70d2ff7d69f12e2976bfc2b7701}\label{main_8c_a2713d70d2ff7d69f12e2976bfc2b7701}} 
+\#define {\bfseries nb\+\_\+mesure}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_aee23af0b24f1036c9de27dbed1653c79}\label{main_8c_aee23af0b24f1036c9de27dbed1653c79}} 
+void {\bfseries code\+Tache} (void $\ast$pv\+Parameters)
+\item 
+\mbox{\Hypertarget{main_8c_ae697ec8fda3eb9e55fedf0c742cfb43d}\label{main_8c_ae697ec8fda3eb9e55fedf0c742cfb43d}} 
+void {\bfseries Get\+Encoder\+Value} (void $\ast$pv\+Parameters)
+\item 
+\mbox{\Hypertarget{main_8c_ac4357b92495b43b12d5ddba054fdb841}\label{main_8c_ac4357b92495b43b12d5ddba054fdb841}} 
+void {\bfseries Tof\+Get\+Distance} (void $\ast$pv\+Parameters)
+\item 
+\mbox{\Hypertarget{main_8c_adb81a5bce39f3ce231eec57eb67e5ca9}\label{main_8c_adb81a5bce39f3ce231eec57eb67e5ca9}} 
+void {\bfseries Rasp\+Read} (void $\ast$pv\+Parameters)
+\item 
+void \mbox{\hyperlink{main_8c_a7a51e888274d9452815c52c048f9d33f}{Test\+Sensor\+On\+I2C}} (int $\ast$tab)
+\begin{DoxyCompactList}\small\item\em Fonction qui detecte et affiche sur l\textquotesingle{}UART1 tous les peripheriques présent sur l\textquotesingle{}I2\+C2. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_abc513dd972081ae765b6949a62872eb7}\label{main_8c_abc513dd972081ae765b6949a62872eb7}} 
+int {\bfseries \+\_\+\+\_\+io\+\_\+putchar} (int ch)
+\item 
+\mbox{\Hypertarget{main_8c_a8a3b0ad512a6e6c6157440b68d395eac}\label{main_8c_a8a3b0ad512a6e6c6157440b68d395eac}} 
+void {\bfseries HAL\+\_\+\+TIM\+\_\+\+Period\+Elapsed\+Callback} (TIM\+\_\+\+Handle\+Type\+Def $\ast$htim)
+\item 
+\mbox{\Hypertarget{main_8c_a0cd91fd3a9608559c2a87a8ba6cba55f}\label{main_8c_a0cd91fd3a9608559c2a87a8ba6cba55f}} 
+void {\bfseries HAL\+\_\+\+GPIO\+\_\+\+EXTI\+\_\+\+Callback} (uint16\+\_\+t GPIO\+\_\+\+Pin)
+\item 
+void \mbox{\hyperlink{main_8c_ae494a9643f29b87d6d81e5264e60e57b}{HAL\+\_\+\+UART\+\_\+\+Rx\+Cplt\+Callback}} (UART\+\_\+\+Handle\+Type\+Def $\ast$huart)
+\begin{DoxyCompactList}\small\item\em Function called at each new character received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_a9f01ffb72325e6328a2239d6de7f4abc}\label{main_8c_a9f01ffb72325e6328a2239d6de7f4abc}} 
+uint8\+\_\+t {\bfseries uart\+Rx\+Received}
+\item 
+\mbox{\Hypertarget{main_8c_a2542ac6d4440b9e1c4a6435c55c79df3}\label{main_8c_a2542ac6d4440b9e1c4a6435c55c79df3}} 
+uint8\+\_\+t {\bfseries uart\+Rx\+Buffer} \mbox{[}UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{main_8c_a3f98e2db2fa0d8f0cfd87b887576207f}\label{main_8c_a3f98e2db2fa0d8f0cfd87b887576207f}} 
+uint8\+\_\+t {\bfseries uart\+Tx\+Buffer} \mbox{[}UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{main_8c_a7ed7fcae733f0b55273b34dfbdf6035a}\label{main_8c_a7ed7fcae733f0b55273b34dfbdf6035a}} 
+uint8\+\_\+t {\bfseries uart\+Rx\+Received\+Rasp}
+\item 
+\mbox{\Hypertarget{main_8c_a02e261f1bd93fe33bad9c748510c29ed}\label{main_8c_a02e261f1bd93fe33bad9c748510c29ed}} 
+uint8\+\_\+t {\bfseries uart\+Rx\+Buffer\+Rasp} \mbox{[}UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+\mbox{\Hypertarget{main_8c_aed6f2f7d5d812b6a1d0a6ce7e8793b36}\label{main_8c_aed6f2f7d5d812b6a1d0a6ce7e8793b36}} 
+uint8\+\_\+t {\bfseries uart\+Tx\+Buffer\+Rasp} \mbox{[}UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE\mbox{]}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{main_8c_a3f030bc6769aa19f45e30e3ab7cf244c}{servo\+\_\+angle}} =0
+\begin{DoxyCompactList}\small\item\em 
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}\end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8c_ad291c2ee9af5fb9845934bb538db8395}\label{main_8c_ad291c2ee9af5fb9845934bb538db8395}} 
+uint16\+\_\+t {\bfseries dist} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}\label{main_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}} 
+int {\bfseries tickD} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a72e1bdde66a91a2bffba233133d5877d}\label{main_8c_a72e1bdde66a91a2bffba233133d5877d}} 
+int {\bfseries consigneD} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a45cfe3779f0bdc1e074aba1a625731b0}\label{main_8c_a45cfe3779f0bdc1e074aba1a625731b0}} 
+int {\bfseries tickG} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a6329fbfcceb702410066b20f5b7d0637}\label{main_8c_a6329fbfcceb702410066b20f5b7d0637}} 
+int {\bfseries consigneG} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a9ba0f2f280a2a2e49c17508af48aad91}\label{main_8c_a9ba0f2f280a2a2e49c17508af48aad91}} 
+int {\bfseries action} = 3
+\item 
+\mbox{\Hypertarget{main_8c_a8f74c86ee41744f84cb26aedcd5b641d}\label{main_8c_a8f74c86ee41744f84cb26aedcd5b641d}} 
+int {\bfseries sens} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a7ce9a8e7b0fbf103c6e4814d357329e4}\label{main_8c_a7ce9a8e7b0fbf103c6e4814d357329e4}} 
+int {\bfseries action\+Rasp} = 3
+\item 
+\mbox{\Hypertarget{main_8c_a33b55682fb8b82e5f968987fd74eb4e5}\label{main_8c_a33b55682fb8b82e5f968987fd74eb4e5}} 
+int {\bfseries sens\+Rasp} = 0
+\item 
+\mbox{\Hypertarget{main_8c_aae3213d24c3650d6836b74cfef8b9074}\label{main_8c_aae3213d24c3650d6836b74cfef8b9074}} 
+int {\bfseries couleur} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a4f2504e3cd237cbe4ee10255c7855e63}\label{main_8c_a4f2504e3cd237cbe4ee10255c7855e63}} 
+int {\bfseries enable} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a1295d4874dbd0400226b4cd4ea166329}\label{main_8c_a1295d4874dbd0400226b4cd4ea166329}} 
+int {\bfseries emergency\+STOP} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a37722a150250e2a5a98e5e0d11e53449}\label{main_8c_a37722a150250e2a5a98e5e0d11e53449}} 
+int {\bfseries start}
+\item 
+\mbox{\Hypertarget{main_8c_a36314f4d36114305b1844ada08154ee6}\label{main_8c_a36314f4d36114305b1844ada08154ee6}} 
+int {\bfseries TOF\+\_\+tab} \mbox{[}nb\+\_\+mesure\mbox{]}
+\item 
+\mbox{\Hypertarget{main_8c_affe2111847adccc1521d6874a1276447}\label{main_8c_affe2111847adccc1521d6874a1276447}} 
+uint {\bfseries tab\+\_\+i} =0
+\item 
+\mbox{\Hypertarget{main_8c_abbd654450a4043caa985ce85b74e4639}\label{main_8c_abbd654450a4043caa985ce85b74e4639}} 
+int {\bfseries TOF\+\_\+dist} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a29165a8d10a34a7ba50c742cc532ea46}\label{main_8c_a29165a8d10a34a7ba50c742cc532ea46}} 
+int {\bfseries enable\+User\+Button} = 0
+\item 
+\mbox{\Hypertarget{main_8c_a031f65efeaa1e17f09cb1d7b411b26a9}\label{main_8c_a031f65efeaa1e17f09cb1d7b411b26a9}} 
+PIController {\bfseries MoteurD}
+\item 
+\mbox{\Hypertarget{main_8c_a2fe08b6e5255f73f8556f7d740fdfb61}\label{main_8c_a2fe08b6e5255f73f8556f7d740fdfb61}} 
+PIController {\bfseries MoteurG}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Main program body 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_a1730ffe1e560465665eb47d9264826f9}\label{main_8c_a1730ffe1e560465665eb47d9264826f9}} 
+\index{main.c@{main.c}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{main_8c_ae494a9643f29b87d6d81e5264e60e57b}\label{main_8c_ae494a9643f29b87d6d81e5264e60e57b}} 
+\index{main.c@{main.c}!HAL\_UART\_RxCpltCallback@{HAL\_UART\_RxCpltCallback}}
+\index{HAL\_UART\_RxCpltCallback@{HAL\_UART\_RxCpltCallback}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HAL\_UART\_RxCpltCallback()}{HAL\_UART\_RxCpltCallback()}}
+{\footnotesize\ttfamily void HAL\+\_\+\+UART\+\_\+\+Rx\+Cplt\+Callback (\begin{DoxyParamCaption}\item[{UART\+\_\+\+Handle\+Type\+Def $\ast$}]{huart }\end{DoxyParamCaption})}
+
+
+
+Function called at each new character received. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+The application entry point. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\label{main_8c_a70af21c671abfcc773614a9a4f63d920}} 
+\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SystemClock\_Config()}{SystemClock\_Config()}}
+{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+System Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Initializes the RCC Oscillators according to the specified parameters in the RCC\+\_\+\+Osc\+Init\+Type\+Def structure.
+
+Initializes the CPU, AHB and APB buses clocks\mbox{\Hypertarget{main_8c_a7a51e888274d9452815c52c048f9d33f}\label{main_8c_a7a51e888274d9452815c52c048f9d33f}} 
+\index{main.c@{main.c}!TestSensorOnI2C@{TestSensorOnI2C}}
+\index{TestSensorOnI2C@{TestSensorOnI2C}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TestSensorOnI2C()}{TestSensorOnI2C()}}
+{\footnotesize\ttfamily void Test\+Sensor\+On\+I2C (\begin{DoxyParamCaption}\item[{int $\ast$}]{tab }\end{DoxyParamCaption})}
+
+
+
+Fonction qui detecte et affiche sur l\textquotesingle{}UART1 tous les peripheriques présent sur l\textquotesingle{}I2\+C2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8c_a3f030bc6769aa19f45e30e3ab7cf244c}\label{main_8c_a3f030bc6769aa19f45e30e3ab7cf244c}} 
+\index{main.c@{main.c}!servo\_angle@{servo\_angle}}
+\index{servo\_angle@{servo\_angle}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{servo\_angle}{servo\_angle}}
+{\footnotesize\ttfamily uint16\+\_\+t servo\+\_\+angle =0}
+
+
+
+
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}

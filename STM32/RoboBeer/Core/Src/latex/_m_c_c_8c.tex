@@ -1,0 +1,217 @@
+\hypertarget{_m_c_c_8c}{}\doxysection{MCC.\+c File Reference}
+\label{_m_c_c_8c}\index{MCC.c@{MCC.c}}
+
+
+\+: lib uses to init and command robobeer\textquotesingle{}s MCC  
+
+
+{\ttfamily \#include \char`\"{}MCC.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_m_c_c_8c_a0bb13f87918820dcf153a31bd55b0759}{Init\+MCC}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui active les Timers en mode PWM pour la commande des MCC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_a04fbbe79230178570bae263591f480b5}{Avancer}} (int vitesse)
+\begin{DoxyCompactList}\small\item\em Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit sans correceteur PI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_a5a9c3f515aed7a0651af33c7264c689d}{Avancer\+PI}} (int moteur, int vitesse)
+\begin{DoxyCompactList}\small\item\em Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit avec correceteur PI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_aa639108f1af32a636dbc672ed4115859}{Reculer}} (int vitesse)
+\begin{DoxyCompactList}\small\item\em Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit sans correceteur PI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_a897df691cfd29c805bfa073bb41581f1}{Reculer\+PI}} (int moteur, int vitesse)
+\begin{DoxyCompactList}\small\item\em Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit avec correceteur PI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_a76c658dc5f4332e4b034419dca518c1c}{Stop}} (void)
+\begin{DoxyCompactList}\small\item\em Fonction qui bloque les roues des MCC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_a667d1409883e92edb0a96da2b44c5f1e}{Tourner}} (int sens, int vitesse)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de faire tourner le robot dans le sens \char`\"{}sens\char`\"{} à la vitesse \char`\"{}vitesse\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_m_c_c_8c_acce79719c3a7f5acb00827a51fed06dc}{Read\+Encodeur}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui effectue la lecture du Timer2 et reset sa valeur. Associe aux variables locales tickD et tickG les valeurs de la vitesse. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_m_c_c_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}\label{_m_c_c_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}} 
+int {\bfseries tickD}
+\item 
+\mbox{\Hypertarget{_m_c_c_8c_a45cfe3779f0bdc1e074aba1a625731b0}\label{_m_c_c_8c_a45cfe3779f0bdc1e074aba1a625731b0}} 
+int {\bfseries tickG}
+\item 
+\mbox{\Hypertarget{_m_c_c_8c_a576e876edb7cf9dc13eaf5dd42446715}\label{_m_c_c_8c_a576e876edb7cf9dc13eaf5dd42446715}} 
+int {\bfseries speedD}
+\item 
+\mbox{\Hypertarget{_m_c_c_8c_aa7672ad4f3f8df4f8ba64de58fb1a7fe}\label{_m_c_c_8c_aa7672ad4f3f8df4f8ba64de58fb1a7fe}} 
+int {\bfseries speedG}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: lib uses to init and command robobeer\textquotesingle{}s MCC 
+
+\begin{DoxyAuthor}{Author}
+\+: quenphil42 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_m_c_c_8c_a04fbbe79230178570bae263591f480b5}\label{_m_c_c_8c_a04fbbe79230178570bae263591f480b5}} 
+\index{MCC.c@{MCC.c}!Avancer@{Avancer}}
+\index{Avancer@{Avancer}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{Avancer()}{Avancer()}}
+{\footnotesize\ttfamily void Avancer (\begin{DoxyParamCaption}\item[{int}]{vitesse }\end{DoxyParamCaption})}
+
+
+
+Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit sans correceteur PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vitesse} & des roues entre 0 et MAX\+\_\+\+ARR\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_a5a9c3f515aed7a0651af33c7264c689d}\label{_m_c_c_8c_a5a9c3f515aed7a0651af33c7264c689d}} 
+\index{MCC.c@{MCC.c}!AvancerPI@{AvancerPI}}
+\index{AvancerPI@{AvancerPI}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{AvancerPI()}{AvancerPI()}}
+{\footnotesize\ttfamily void Avancer\+PI (\begin{DoxyParamCaption}\item[{int}]{moteur,  }\item[{int}]{vitesse }\end{DoxyParamCaption})}
+
+
+
+Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit avec correceteur PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vitesse} & des roues entre 0 et MAX\+\_\+\+ARR\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_a0bb13f87918820dcf153a31bd55b0759}\label{_m_c_c_8c_a0bb13f87918820dcf153a31bd55b0759}} 
+\index{MCC.c@{MCC.c}!InitMCC@{InitMCC}}
+\index{InitMCC@{InitMCC}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{InitMCC()}{InitMCC()}}
+{\footnotesize\ttfamily void Init\+MCC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui active les Timers en mode PWM pour la commande des MCC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_acce79719c3a7f5acb00827a51fed06dc}\label{_m_c_c_8c_acce79719c3a7f5acb00827a51fed06dc}} 
+\index{MCC.c@{MCC.c}!ReadEncodeur@{ReadEncodeur}}
+\index{ReadEncodeur@{ReadEncodeur}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{ReadEncodeur()}{ReadEncodeur()}}
+{\footnotesize\ttfamily void Read\+Encodeur (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui effectue la lecture du Timer2 et reset sa valeur. Associe aux variables locales tickD et tickG les valeurs de la vitesse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_aa639108f1af32a636dbc672ed4115859}\label{_m_c_c_8c_aa639108f1af32a636dbc672ed4115859}} 
+\index{MCC.c@{MCC.c}!Reculer@{Reculer}}
+\index{Reculer@{Reculer}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{Reculer()}{Reculer()}}
+{\footnotesize\ttfamily void Reculer (\begin{DoxyParamCaption}\item[{int}]{vitesse }\end{DoxyParamCaption})}
+
+
+
+Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit sans correceteur PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vitesse} & des roues entre 0 et MAX\+\_\+\+ARR\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_a897df691cfd29c805bfa073bb41581f1}\label{_m_c_c_8c_a897df691cfd29c805bfa073bb41581f1}} 
+\index{MCC.c@{MCC.c}!ReculerPI@{ReculerPI}}
+\index{ReculerPI@{ReculerPI}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{ReculerPI()}{ReculerPI()}}
+{\footnotesize\ttfamily void Reculer\+PI (\begin{DoxyParamCaption}\item[{int}]{moteur,  }\item[{int}]{vitesse }\end{DoxyParamCaption})}
+
+
+
+Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit avec correceteur PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vitesse} & des roues entre 0 et MAX\+\_\+\+ARR\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_a76c658dc5f4332e4b034419dca518c1c}\label{_m_c_c_8c_a76c658dc5f4332e4b034419dca518c1c}} 
+\index{MCC.c@{MCC.c}!Stop@{Stop}}
+\index{Stop@{Stop}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily void Stop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui bloque les roues des MCC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_m_c_c_8c_a667d1409883e92edb0a96da2b44c5f1e}\label{_m_c_c_8c_a667d1409883e92edb0a96da2b44c5f1e}} 
+\index{MCC.c@{MCC.c}!Tourner@{Tourner}}
+\index{Tourner@{Tourner}!MCC.c@{MCC.c}}
+\doxysubsubsection{\texorpdfstring{Tourner()}{Tourner()}}
+{\footnotesize\ttfamily void Tourner (\begin{DoxyParamCaption}\item[{int}]{sens,  }\item[{int}]{vitesse }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de faire tourner le robot dans le sens \char`\"{}sens\char`\"{} à la vitesse \char`\"{}vitesse\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vitesse} & des roues entre 0 et MAX\+\_\+\+ARR \\
+\hline
+{\em sens} & = 1 tourner à droite \\
+\hline
+{\em sens} & = 0 tourner à gauche\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}

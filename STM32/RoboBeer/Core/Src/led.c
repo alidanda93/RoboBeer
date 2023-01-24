@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file           : led.c
+  * @brief          : lib uses to command robobeer user's leds
+  * @author 		: quenphil42
+  ******************************************************************************
+  */
+
 /*
  * led.c
  *
@@ -8,7 +16,14 @@
 
 #include "led.h"
 
-
+/**
+ * @brief Fonction qui permet d'activer la led i de la carte mere
+ *
+ * @param entier allant de 1 à 4 indiquant le numero de la led qu'on souhaite allumer
+ *
+ * @retval None
+ *
+ */
 void TurnOnLed(int i)
 {
 	switch (i)
@@ -30,7 +45,14 @@ void TurnOnLed(int i)
 }
 
 
-
+/**
+ * @brief Fonction qui permet d'eteindre la led i de la carte mere
+ *
+ * @param entier allant de 1 à 4 indiquant le numero de la led qu'on souhaite allumer
+ *
+ * @retval None
+ *
+ */
 void TurnOffLed(int i)
 {
 	switch (i)
@@ -52,7 +74,14 @@ void TurnOffLed(int i)
 }
 
 
-
+/**
+ * @brief Fonction qui permet de changer l'etat de la led i de la carte mere
+ *
+ * @param entier allant de 1 à 4 indiquant le numero de la led qu'on souhaite allumer
+ *
+ * @retval None
+ *
+ */
 void SwitchLed(int i)
 {
 	switch (i)
@@ -74,7 +103,14 @@ void SwitchLed(int i)
 }
 
 
-
+/**
+ * @brief Fonction qui allume toutes les leds
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void LedError()
 {
 	HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);

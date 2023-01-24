@@ -1,0 +1,244 @@
+\hypertarget{driver___to_f_8c}{}\doxysection{driver\+\_\+\+To\+F.\+c File Reference}
+\label{driver___to_f_8c}\index{driver\_ToF.c@{driver\_ToF.c}}
+
+
+\+: lib uses to int and uses TOF sensor  
+
+
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}driver\+\_\+\+To\+F.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtag_sequence_step_timeouts}{tag\+Sequence\+Step\+Timeouts}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a5f0c17e6d23211686e92570b058587f3}\label{driver___to_f_8c_a5f0c17e6d23211686e92570b058587f3}} 
+\#define {\bfseries calc\+Macro\+Period}(vcsel\+\_\+period\+\_\+pclks)~((((uint32\+\_\+t)2304 $\ast$ (vcsel\+\_\+period\+\_\+pclks) $\ast$ 1655) + 500) / 1000)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aa731eb10dead51651d0d803c530478e0}\label{driver___to_f_8c_aa731eb10dead51651d0d803c530478e0}} 
+\#define {\bfseries encode\+Vcsel\+Period}(period\+\_\+pclks)~(((period\+\_\+pclks) $>$$>$ 1) -\/ 1)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a9274a673acd31fc465faa224e334045f}\label{driver___to_f_8c_a9274a673acd31fc465faa224e334045f}} 
+\#define {\bfseries SEQUENCE\+\_\+\+ENABLE\+\_\+\+FINAL\+\_\+\+RANGE}~0x80
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a120b3bfa7d72c42e5b2ef56f4cf03d46}\label{driver___to_f_8c_a120b3bfa7d72c42e5b2ef56f4cf03d46}} 
+\#define {\bfseries SEQUENCE\+\_\+\+ENABLE\+\_\+\+PRE\+\_\+\+RANGE}~0x40
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aace107acda6b8f69037c62c3b6b2210e}\label{driver___to_f_8c_aace107acda6b8f69037c62c3b6b2210e}} 
+\#define {\bfseries SEQUENCE\+\_\+\+ENABLE\+\_\+\+TCC}~0x10
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a888476ea2ab3da7070accc36bc408719}\label{driver___to_f_8c_a888476ea2ab3da7070accc36bc408719}} 
+\#define {\bfseries SEQUENCE\+\_\+\+ENABLE\+\_\+\+DSS}~0x08
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ae8a0f11e5bc1769c166a1e172e98593b}\label{driver___to_f_8c_ae8a0f11e5bc1769c166a1e172e98593b}} 
+\#define {\bfseries SEQUENCE\+\_\+\+ENABLE\+\_\+\+MSRC}~0x04
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a1d2a65b6d17f47c398f177e0d32dcb83}\label{driver___to_f_8c_a1d2a65b6d17f47c398f177e0d32dcb83}} 
+\#define {\bfseries REG\+\_\+\+IDENTIFICATION\+\_\+\+MODEL\+\_\+\+ID}~0xc0
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_abab8e7ea11649359b6ea42055dc3a0c1}\label{driver___to_f_8c_abab8e7ea11649359b6ea42055dc3a0c1}} 
+\#define {\bfseries REG\+\_\+\+IDENTIFICATION\+\_\+\+REVISION\+\_\+\+ID}~0xc2
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a7d628f19c8fd43ac98ae71ad21b74769}\label{driver___to_f_8c_a7d628f19c8fd43ac98ae71ad21b74769}} 
+\#define {\bfseries REG\+\_\+\+SYSRANGE\+\_\+\+START}~0x00
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a7283f93bf4d6eb170e9847b236aee44b}\label{driver___to_f_8c_a7283f93bf4d6eb170e9847b236aee44b}} 
+\#define {\bfseries REG\+\_\+\+RESULT\+\_\+\+INTERRUPT\+\_\+\+STATUS}~0x13
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a6429722d22fe6ca66ef3d8470d066ceb}\label{driver___to_f_8c_a6429722d22fe6ca66ef3d8470d066ceb}} 
+\#define {\bfseries RESULT\+\_\+\+RANGE\+\_\+\+STATUS}~0x14
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a820e8fa7723077ffda211953f1243c37}\label{driver___to_f_8c_a820e8fa7723077ffda211953f1243c37}} 
+\#define {\bfseries ALGO\+\_\+\+PHASECAL\+\_\+\+LIM}~0x30
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ae1a60036fb03564b63b0ec16677cc0a9}\label{driver___to_f_8c_ae1a60036fb03564b63b0ec16677cc0a9}} 
+\#define {\bfseries ALGO\+\_\+\+PHASECAL\+\_\+\+CONFIG\+\_\+\+TIMEOUT}~0x30
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aec618d12188a12e34066f856a29bdbf0}\label{driver___to_f_8c_aec618d12188a12e34066f856a29bdbf0}} 
+\#define {\bfseries GLOBAL\+\_\+\+CONFIG\+\_\+\+VCSEL\+\_\+\+WIDTH}~0x32
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a375bd2b4e8d7c3e8130f8758fc5b7fc3}\label{driver___to_f_8c_a375bd2b4e8d7c3e8130f8758fc5b7fc3}} 
+\#define {\bfseries FINAL\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VALID\+\_\+\+PHASE\+\_\+\+LOW}~0x47
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ac6e3d1cd347360cb8928fcb4bd48e2d1}\label{driver___to_f_8c_ac6e3d1cd347360cb8928fcb4bd48e2d1}} 
+\#define {\bfseries FINAL\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VALID\+\_\+\+PHASE\+\_\+\+HIGH}~0x48
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a576ad3a7d21c21b25c4745c21df040e8}\label{driver___to_f_8c_a576ad3a7d21c21b25c4745c21df040e8}} 
+\#define {\bfseries PRE\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VCSEL\+\_\+\+PERIOD}~0x50
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ae3fcc6d82c746084b932c7ac125cbf8f}\label{driver___to_f_8c_ae3fcc6d82c746084b932c7ac125cbf8f}} 
+\#define {\bfseries PRE\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+TIMEOUT\+\_\+\+MACROP\+\_\+\+HI}~0x51
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a323906602ac50d67cd54019bf6befdb9}\label{driver___to_f_8c_a323906602ac50d67cd54019bf6befdb9}} 
+\#define {\bfseries PRE\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VALID\+\_\+\+PHASE\+\_\+\+LOW}~0x56
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a1640fbe4a7b31d02b8d3b416921eb2ff}\label{driver___to_f_8c_a1640fbe4a7b31d02b8d3b416921eb2ff}} 
+\#define {\bfseries PRE\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VALID\+\_\+\+PHASE\+\_\+\+HIGH}~0x57
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a762be7fa8feffe9563fbf38003066c64}\label{driver___to_f_8c_a762be7fa8feffe9563fbf38003066c64}} 
+\#define {\bfseries REG\+\_\+\+MSRC\+\_\+\+CONFIG\+\_\+\+CONTROL}~0x60
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a296f98fd1eb5b788d4100d3b0a9a3727}\label{driver___to_f_8c_a296f98fd1eb5b788d4100d3b0a9a3727}} 
+\#define {\bfseries FINAL\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+VCSEL\+\_\+\+PERIOD}~0x70
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ac48f0c7483af856f9fe1783ab33b93a5}\label{driver___to_f_8c_ac48f0c7483af856f9fe1783ab33b93a5}} 
+\#define {\bfseries FINAL\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+TIMEOUT\+\_\+\+MACROP\+\_\+\+HI}~0x71
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a132ff4b1e969e27e56e29ed916f2412c}\label{driver___to_f_8c_a132ff4b1e969e27e56e29ed916f2412c}} 
+\#define {\bfseries MSRC\+\_\+\+CONFIG\+\_\+\+TIMEOUT\+\_\+\+MACROP}~0x46
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a169be6dc1891aa49fddcc22fb7340db4}\label{driver___to_f_8c_a169be6dc1891aa49fddcc22fb7340db4}} 
+\#define {\bfseries FINAL\+\_\+\+RANGE\+\_\+\+CONFIG\+\_\+\+MIN\+\_\+\+COUNT\+\_\+\+RATE\+\_\+\+RTN\+\_\+\+LIMIT}~0x44
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a8927855b04ea03b9a4678ef42fc3073e}\label{driver___to_f_8c_a8927855b04ea03b9a4678ef42fc3073e}} 
+\#define {\bfseries SYSRANGE\+\_\+\+START}~0x00
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a2e37298ac5ecbe7ca0900315e71e9375}\label{driver___to_f_8c_a2e37298ac5ecbe7ca0900315e71e9375}} 
+\#define {\bfseries SYSTEM\+\_\+\+SEQUENCE\+\_\+\+CONFIG}~0x01
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ada6400414ef4b8244c32441531b66bd5}\label{driver___to_f_8c_ada6400414ef4b8244c32441531b66bd5}} 
+\#define {\bfseries SYSTEM\+\_\+\+INTERRUPT\+\_\+\+CONFIG\+\_\+\+GPIO}~0x0A
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_af40e16604cc2cef5bc5bbed72000ae87}\label{driver___to_f_8c_af40e16604cc2cef5bc5bbed72000ae87}} 
+\#define {\bfseries RESULT\+\_\+\+INTERRUPT\+\_\+\+STATUS}~0x13
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a8609aa80574602a7cbfb02d6ba9f9bae}\label{driver___to_f_8c_a8609aa80574602a7cbfb02d6ba9f9bae}} 
+\#define {\bfseries VHV\+\_\+\+CONFIG\+\_\+\+PAD\+\_\+\+SCL\+\_\+\+SDA\+\_\+\+\_\+\+EXTSUP\+\_\+\+HV}~0x89
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aafaa784da83e531013cb55aa48d4fe48}\label{driver___to_f_8c_aafaa784da83e531013cb55aa48d4fe48}} 
+\#define {\bfseries GLOBAL\+\_\+\+CONFIG\+\_\+\+SPAD\+\_\+\+ENABLES\+\_\+\+REF\+\_\+0}~0x\+B0
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_ac96f0353f6896b6a6c9bfeaa69da2214}\label{driver___to_f_8c_ac96f0353f6896b6a6c9bfeaa69da2214}} 
+\#define {\bfseries GPIO\+\_\+\+HV\+\_\+\+MUX\+\_\+\+ACTIVE\+\_\+\+HIGH}~0x84
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a74241935b17022399d0348e1c9b136f8}\label{driver___to_f_8c_a74241935b17022399d0348e1c9b136f8}} 
+\#define {\bfseries SYSTEM\+\_\+\+INTERRUPT\+\_\+\+CLEAR}~0x0B
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a85fda3522e69a1bf85f7dcd97b6023a1}\label{driver___to_f_8c_a85fda3522e69a1bf85f7dcd97b6023a1}} 
+\#define {\bfseries MAX\+\_\+\+TIMEOUT}~50
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a8128d3209bbac53c6fe53b17993bda3c}\label{driver___to_f_8c_a8128d3209bbac53c6fe53b17993bda3c}} 
+typedef enum vcselperiodtype {\bfseries vcsel\+Period\+Type}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a30aafe0a438c4ea94d8d5ccbaf4dc980}\label{driver___to_f_8c_a30aafe0a438c4ea94d8d5ccbaf4dc980}} 
+typedef struct \mbox{\hyperlink{structtag_sequence_step_timeouts}{tag\+Sequence\+Step\+Timeouts}} {\bfseries Sequence\+Step\+Timeouts}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a873c829be945af3f68c794b5a1cb5374}\label{driver___to_f_8c_a873c829be945af3f68c794b5a1cb5374}} 
+enum {\bfseries vcselperiodtype} \{ {\bfseries Vcsel\+Period\+Pre\+Range}
+, {\bfseries Vcsel\+Period\+Final\+Range}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a0227817d7ec67abd2efd81af943c0126}\label{driver___to_f_8c_a0227817d7ec67abd2efd81af943c0126}} 
+int {\bfseries tof\+Init} (int b\+Long\+Range)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a522cb49533e768510e7b13cb3b974b5d}\label{driver___to_f_8c_a522cb49533e768510e7b13cb3b974b5d}} 
+uint16\+\_\+t {\bfseries read\+Range\+Continuous\+Millimeters} (void)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a39bce4a7ad51c39ace97188402cc37bc}\label{driver___to_f_8c_a39bce4a7ad51c39ace97188402cc37bc}} 
+int {\bfseries tof\+Read\+Distance} (void)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aae103982352aa3fbc7cdcd4b8902eff0}\label{driver___to_f_8c_aae103982352aa3fbc7cdcd4b8902eff0}} 
+int {\bfseries tof\+Get\+Model} (int $\ast$model, int $\ast$revision)
+\item 
+int \mbox{\hyperlink{driver___to_f_8c_a4ece7dc05a5e9325ee74757df7d60e69}{init\+Tof}} ()
+\begin{DoxyCompactList}\small\item\em Returns the distance in mm as a global variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{driver___to_f_8c_a384960cff5705dda281e1fa91589f9cf}\label{driver___to_f_8c_a384960cff5705dda281e1fa91589f9cf}} 
+int {\bfseries Tof\+Shutdown} (void)
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aac11db17dcad8e344e3d25ba21c4dc93}\label{driver___to_f_8c_aac11db17dcad8e344e3d25ba21c4dc93}} 
+void {\bfseries RB\+\_\+\+Delay} (int ms)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a9ddc00b7cd430a60f768911c76c35792}\label{driver___to_f_8c_a9ddc00b7cd430a60f768911c76c35792}} 
+unsigned char {\bfseries uc\+I2\+CMode} \mbox{[}$\,$\mbox{]} = \{4, 0x88,0x00, 0x80,0x01, 0xff,0x01, 0x00,0x00\}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a152cb9c7a4b933b24edd40a8e4a24808}\label{driver___to_f_8c_a152cb9c7a4b933b24edd40a8e4a24808}} 
+unsigned char {\bfseries uc\+I2\+CMode2} \mbox{[}$\,$\mbox{]} = \{3, 0x00,0x01, 0xff,0x00, 0x80,0x00\}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a531bbd8b4916479efc44df38d3b41b29}\label{driver___to_f_8c_a531bbd8b4916479efc44df38d3b41b29}} 
+unsigned char {\bfseries uc\+SPAD0} \mbox{[}$\,$\mbox{]} = \{4, 0x80,0x01, 0xff,0x01, 0x00,0x00, 0xff,0x06\}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a2e9d0c747629e1df75ddbdd13bdddb71}\label{driver___to_f_8c_a2e9d0c747629e1df75ddbdd13bdddb71}} 
+unsigned char {\bfseries uc\+SPAD1} \mbox{[}$\,$\mbox{]} = \{5, 0xff,0x07, 0x81,0x01, 0x80,0x01, 0x94,0x6b, 0x83,0x00\}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_a49bf8abea7b3dac5e985122f4879774d}\label{driver___to_f_8c_a49bf8abea7b3dac5e985122f4879774d}} 
+unsigned char {\bfseries uc\+SPAD2} \mbox{[}$\,$\mbox{]} = \{4, 0xff,0x01, 0x00,0x01, 0xff,0x00, 0x80,0x00\}
+\item 
+\mbox{\Hypertarget{driver___to_f_8c_aadc73019707918fae81e52bc1cc87b92}\label{driver___to_f_8c_aadc73019707918fae81e52bc1cc87b92}} 
+unsigned char {\bfseries uc\+SPAD} \mbox{[}$\,$\mbox{]} = \{5, 0xff,0x01, 0x4f,0x00, 0x4e,0x2c, 0xff,0x00, 0xb6,0xb4\}
+\item 
+unsigned char \mbox{\hyperlink{driver___to_f_8c_a4507b7109a8a9c65aa837eae59bfb7bd}{uc\+Def\+Tuning}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: lib uses to int and uses TOF sensor 
+
+\begin{DoxyAuthor}{Author}
+\+: Larry Bank 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{driver___to_f_8c_a4ece7dc05a5e9325ee74757df7d60e69}\label{driver___to_f_8c_a4ece7dc05a5e9325ee74757df7d60e69}} 
+\index{driver\_ToF.c@{driver\_ToF.c}!initTof@{initTof}}
+\index{initTof@{initTof}!driver\_ToF.c@{driver\_ToF.c}}
+\doxysubsubsection{\texorpdfstring{initTof()}{initTof()}}
+{\footnotesize\ttfamily int init\+Tof (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the distance in mm as a global variable. 
+
+\begin{DoxyReturn}{Returns}
+distance
+\end{DoxyReturn}
+Use to initialize the ToF sensor
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{driver___to_f_8c_a4507b7109a8a9c65aa837eae59bfb7bd}\label{driver___to_f_8c_a4507b7109a8a9c65aa837eae59bfb7bd}} 
+\index{driver\_ToF.c@{driver\_ToF.c}!ucDefTuning@{ucDefTuning}}
+\index{ucDefTuning@{ucDefTuning}!driver\_ToF.c@{driver\_ToF.c}}
+\doxysubsubsection{\texorpdfstring{ucDefTuning}{ucDefTuning}}
+{\footnotesize\ttfamily unsigned char uc\+Def\+Tuning\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{80, 0xff,0x01, 0x00,0x00, 0xff,0x00, 0x09,0x00,}
+\DoxyCodeLine{0x10,0x00, 0x11,0x00, 0x24,0x01, 0x25,0xff, 0x75,0x00, 0xff,0x01, 0x4e,0x2c,}
+\DoxyCodeLine{0x48,0x00, 0x30,0x20, 0xff,0x00, 0x30,0x09, 0x54,0x00, 0x31,0x04, 0x32,0x03,}
+\DoxyCodeLine{0x40,0x83, 0x46,0x25, 0x60,0x00, 0x27,0x00, 0x50,0x06, 0x51,0x00, 0x52,0x96,}
+\DoxyCodeLine{0x56,0x08, 0x57,0x30, 0x61,0x00, 0x62,0x00, 0x64,0x00, 0x65,0x00, 0x66,0xa0,}
+\DoxyCodeLine{0xff,0x01, 0x22,0x32, 0x47,0x14, 0x49,0xff, 0x4a,0x00, 0xff,0x00, 0x7a,0x0a,}
+\DoxyCodeLine{0x7b,0x00, 0x78,0x21, 0xff,0x01, 0x23,0x34, 0x42,0x00, 0x44,0xff, 0x45,0x26,}
+\DoxyCodeLine{0x46,0x05, 0x40,0x40, 0x0e,0x06, 0x20,0x1a, 0x43,0x40, 0xff,0x00, 0x34,0x03,}
+\DoxyCodeLine{0x35,0x44, 0xff,0x01, 0x31,0x04, 0x4b,0x09, 0x4c,0x05, 0x4d,0x04, 0xff,0x00,}
+\DoxyCodeLine{0x44,0x00, 0x45,0x20, 0x47,0x08, 0x48,0x28, 0x67,0x00, 0x70,0x04, 0x71,0x01,}
+\DoxyCodeLine{0x72,0xfe, 0x76,0x00, 0x77,0x00, 0xff,0x01, 0x0d,0x01, 0xff,0x00, 0x80,0x01,}
+\DoxyCodeLine{0x01,0xf8, 0xff,0x01, 0x8e,0x01, 0x00,0x01, 0xff,0x00, 0x80,0x00\}}
+
+\end{DoxyCode}

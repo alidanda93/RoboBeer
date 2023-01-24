@@ -140,12 +140,13 @@ void RaspRead (void * pvParameters);
 /* USER CODE BEGIN 0 */
 
 /**
-  * @brief  Period elapsed callback in non-blocking mode
-  * @param  htim TIM handle
-  * @retval None
-  */
-
-
+ * @brief Fonction qui detecte et affiche sur l'UART1 tous les peripheriques présent sur l'I2C2
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void TestSensorOnI2C(int * tab)
 {
 	 int u = 0;

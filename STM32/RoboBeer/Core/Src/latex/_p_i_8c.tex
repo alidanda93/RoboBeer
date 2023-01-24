@@ -1,0 +1,64 @@
+\hypertarget{_p_i_8c}{}\doxysection{PI.\+c File Reference}
+\label{_p_i_8c}\index{PI.c@{PI.c}}
+
+
+Ce fichier contient le code en rapport avec l\textquotesingle{}asservissement.  
+
+
+{\ttfamily \#include \char`\"{}PI.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}MCC.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_p_i_8c_a415361350fbe9761433646a58974fd63}{PIController\+\_\+\+Init}} (PIController $\ast$pi)
+\begin{DoxyCompactList}\small\item\em Fonction qui fixe la sortie du PI et les valeurs des mémoires à 0.\+0. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{_p_i_8c_a2195be3277fb882e11c28fb0b4b09bb8}{PIController\+\_\+\+Update}} (PIController $\ast$pi, float consigne, float measurement)
+\begin{DoxyCompactList}\small\item\em Fonction qui met à jour les valeurs de la structure PI et renvoi la sortie du bloc PI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ce fichier contient le code en rapport avec l\textquotesingle{}asservissement. 
+
+Created on\+: Dec 8, 2022 Author\+: quent 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_p_i_8c_a415361350fbe9761433646a58974fd63}\label{_p_i_8c_a415361350fbe9761433646a58974fd63}} 
+\index{PI.c@{PI.c}!PIController\_Init@{PIController\_Init}}
+\index{PIController\_Init@{PIController\_Init}!PI.c@{PI.c}}
+\doxysubsubsection{\texorpdfstring{PIController\_Init()}{PIController\_Init()}}
+{\footnotesize\ttfamily void PIController\+\_\+\+Init (\begin{DoxyParamCaption}\item[{PIController $\ast$}]{pi }\end{DoxyParamCaption})}
+
+
+
+Fonction qui fixe la sortie du PI et les valeurs des mémoires à 0.\+0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & pi\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_p_i_8c_a2195be3277fb882e11c28fb0b4b09bb8}\label{_p_i_8c_a2195be3277fb882e11c28fb0b4b09bb8}} 
+\index{PI.c@{PI.c}!PIController\_Update@{PIController\_Update}}
+\index{PIController\_Update@{PIController\_Update}!PI.c@{PI.c}}
+\doxysubsubsection{\texorpdfstring{PIController\_Update()}{PIController\_Update()}}
+{\footnotesize\ttfamily float PIController\+\_\+\+Update (\begin{DoxyParamCaption}\item[{PIController $\ast$}]{pi,  }\item[{float}]{consigne,  }\item[{float}]{measurement }\end{DoxyParamCaption})}
+
+
+
+Fonction qui met à jour les valeurs de la structure PI et renvoi la sortie du bloc PI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em struct} & pi \\
+\hline
+{\em consigne} & \\
+\hline
+{\em measurement} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}

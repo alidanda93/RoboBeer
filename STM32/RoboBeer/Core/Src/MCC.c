@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file           : MCC.c
+  * @brief          : lib uses to init and command robobeer's MCC
+  * @author 		: quenphil42
+  ******************************************************************************
+  */
+
 /*
  * MCC.c
  *
@@ -14,6 +22,14 @@ extern int speedD;
 extern int speedG;
 
 
+/**
+ * @brief Fonction qui active les Timers en mode PWM pour la commande des MCC
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void InitMCC()
 {
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
@@ -23,6 +39,14 @@ void InitMCC()
 	Stop();
 }
 
+/**
+ * @brief Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit sans correceteur PI
+ *
+ * @param vitesse des roues entre 0 et MAX_ARR
+ *
+ * @retval None
+ *
+ */
 void Avancer(int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -33,6 +57,14 @@ void Avancer(int vitesse)
 
 }
 
+/**
+ * @brief Fonction qui modifie la consigne de vitesse des moteurs pour avancer tout droit avec correceteur PI
+ *
+ * @param vitesse des roues entre 0 et MAX_ARR
+ *
+ * @retval None
+ *
+ */
 void AvancerPI(int moteur, int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -48,6 +80,14 @@ void AvancerPI(int moteur, int vitesse)
 	}
 }
 
+/**
+ * @brief Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit sans correceteur PI
+ *
+ * @param vitesse des roues entre 0 et MAX_ARR
+ *
+ * @retval None
+ *
+ */
 void Reculer(int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -57,6 +97,15 @@ void Reculer(int vitesse)
 	TIM1->CCR4=vitesse;
 }
 
+
+/**
+ * @brief Fonction qui modifie la consigne de vitesse des moteurs pour reculer tout droit avec correceteur PI
+ *
+ * @param vitesse des roues entre 0 et MAX_ARR
+ *
+ * @retval None
+ *
+ */
 void ReculerPI(int moteur, int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -72,6 +121,14 @@ void ReculerPI(int moteur, int vitesse)
 	}
 }
 
+/**
+ * @brief Fonction qui bloque les roues des MCC
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void Stop(void)
 {
 	TIM1->CCR1=MAX_ARR;
@@ -80,8 +137,17 @@ void Stop(void)
 	TIM1->CCR4=MAX_ARR;
 }
 
-//sens = 1 tourner a droite
-//sens = 0 tourner a gauche
+
+/**
+ * @brief Fonction qui permet de faire tourner le robot dans le sens "sens" à la vitesse "vitesse"
+ *
+ * @param 	vitesse des roues entre 0 et MAX_ARR
+ * @param 	sens = 1 tourner à droite
+ * @param 	sens = 0 tourner à gauche
+ *
+ * @retval None
+ *
+ */
 void Tourner(int sens, int vitesse)
 {
 	if(vitesse > MAX_ARR || vitesse < 0) Error_Handler();
@@ -104,6 +170,16 @@ void Tourner(int sens, int vitesse)
 
 }
 
+
+/**
+ * @brief 	Fonction qui effectue la lecture du Timer2 et reset sa valeur.
+ * 			Associe aux variables locales tickD et tickG les valeurs de la vitesse
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void ReadEncodeur()
 {
 	tickD = Mid_Period_TIM2 - (TIM2->CNT);

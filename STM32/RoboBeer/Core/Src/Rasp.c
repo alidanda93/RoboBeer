@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file           : Rasp.c
+  * @brief          : lib uses to communicate in UART with Raspberry
+  * @author 		: quenphil42
+  ******************************************************************************
+  */
+
 /*
  * Rasp.c
  *
@@ -30,6 +38,15 @@ extern uint8_t uartTxBufferRasp[UART_TX_BUFFER_SIZE];
 extern uint8_t stringSizeRasp;
 int bits[8] = {0};
 
+
+/**
+ * @brief Fonction qui recupère les données recues et les segmentes dans une liste avec comme separateur " "
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void raspGetChar(void)
 {
 
@@ -54,7 +71,14 @@ void raspGetChar(void)
 }
 
 
-
+/**
+ * @brief Fonction qui ecrit dans l'uart1 un message d'erreur si la tram lue est fausse
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void raspErrorReceive(void)
 {
 	HAL_UART_Transmit(&huart1, errlect, sizeof(errlect), HAL_MAX_DELAY);
@@ -63,6 +87,7 @@ void raspErrorReceive(void)
 
 /**
   * @brief  Call function depends of the value of argcRasp and argvRasp
+  *
   * @retval None
   */
 void raspExec(void)

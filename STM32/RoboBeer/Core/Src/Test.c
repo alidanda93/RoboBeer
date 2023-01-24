@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file           : Test.c
+  * @brief          : lib uses to give action command for the robobeer
+  * @author 		: quenphil42
+  ******************************************************************************
+  */
+
 /*
  * Test.c
  *
@@ -29,12 +37,30 @@ int start = 0;
 #define TOF_DEVANT_CANNETTE_VALUE 250
 #define TOF_SEUIL 1000
 
+
+/**
+ * @brief Fonction qui initialiser les variables mémoires pour l'odométrie et change l'etat de la variable start
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void Debut_Test()
 {
 	start = (start+1)%2;
 	dist = 0;
 }
 
+
+/**
+ * @brief Fonction bloquante qui permet de faire deplacer le robot en une trajectoire carrée
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void Test_Odometrie_Carre()
 {
 	/* avancer 1*/
@@ -140,7 +166,14 @@ void Test_Odometrie_Carre()
 	HAL_Delay(2000);
 }
 
-
+/**
+ * @brief Fonction bloquante qui permet de faire tourner le robot sur lui même un tour
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void Test_Tourner()
 {
 	consigneD = 200;	//vitesse
@@ -162,6 +195,15 @@ void Test_Tourner()
 /*Avant test Attention :
  * verifier que TOF_dist est MAJ souvent (mettre dans Tim3)
  * verifier valeur TOF_dist quand rien n'est detecte (est ce 0 ou Max Val ?)
+ */
+
+/**
+ * @brief Fonction bloquante qui permet de detecter une canette s'en approcher, la saisir et la redeposer devant le point de départ du robot.
+ *
+ * @param None
+ *
+ * @retval None
+ *
  */
 void Test_Canette()
 {
@@ -301,7 +343,14 @@ void Test_Canette()
 
 }
 
-
+/**
+ * @brief Fonction bloquante non codée pour le moment
+ *
+ * @param None
+ *
+ * @retval None
+ *
+ */
 void Test_Rasp()
 {
 

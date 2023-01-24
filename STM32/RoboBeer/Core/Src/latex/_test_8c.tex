@@ -1,0 +1,182 @@
+\hypertarget{_test_8c}{}\doxysection{Test.\+c File Reference}
+\label{_test_8c}\index{Test.c@{Test.c}}
+
+
+\+: lib uses to give action command for the robobeer  
+
+
+{\ttfamily \#include \char`\"{}MCC.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}servo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Test.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_test_8c_ab8a17bd7aebfe396839620a814ec3e4d}\label{_test_8c_ab8a17bd7aebfe396839620a814ec3e4d}} 
+\#define {\bfseries DIST}~3000
+\item 
+\mbox{\Hypertarget{_test_8c_a62249e384b997229a3e2ae74ade334e2}\label{_test_8c_a62249e384b997229a3e2ae74ade334e2}} 
+\#define {\bfseries DELAY}~1000
+\item 
+\mbox{\Hypertarget{_test_8c_ab1bcbb6bc09ffc9e00eb565ea61438a5}\label{_test_8c_ab1bcbb6bc09ffc9e00eb565ea61438a5}} 
+\#define {\bfseries OFFSET\+\_\+\+OUVERTURE\+\_\+\+PINCE}~90
+\item 
+\mbox{\Hypertarget{_test_8c_a20c27b245557552f42b5cf935468f0de}\label{_test_8c_a20c27b245557552f42b5cf935468f0de}} 
+\#define {\bfseries TOF\+\_\+\+DEVANT\+\_\+\+CANNETTE\+\_\+\+VALUE}~250
+\item 
+\mbox{\Hypertarget{_test_8c_a8962b3c00b136945bd4e4e87846fef0f}\label{_test_8c_a8962b3c00b136945bd4e4e87846fef0f}} 
+\#define {\bfseries TOF\+\_\+\+SEUIL}~1000
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_test_8c_a04c474ae0427c792f5468e0826ee3b7c}{Debut\+\_\+\+Test}} ()
+\begin{DoxyCompactList}\small\item\em Fonction qui initialiser les variables mémoires pour l\textquotesingle{}odométrie et change l\textquotesingle{}etat de la variable start. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_test_8c_ab52b604af0935235573323f8c769b27e}{Test\+\_\+\+Odometrie\+\_\+\+Carre}} ()
+\begin{DoxyCompactList}\small\item\em Fonction bloquante qui permet de faire deplacer le robot en une trajectoire carrée. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_test_8c_a78c8bbc7921f5517a3a4a4108714a82e}{Test\+\_\+\+Tourner}} ()
+\begin{DoxyCompactList}\small\item\em Fonction bloquante qui permet de faire tourner le robot sur lui même un tour. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_test_8c_ab1c116ebf2e0a3999b3669af3e7abc8d}{Test\+\_\+\+Canette}} ()
+\begin{DoxyCompactList}\small\item\em Fonction bloquante qui permet de detecter une canette s\textquotesingle{}en approcher, la saisir et la redeposer devant le point de départ du robot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_test_8c_a1409e38dca296c0cbae227d4db6ddc85}{Test\+\_\+\+Rasp}} ()
+\begin{DoxyCompactList}\small\item\em Fonction bloquante non codée pour le moment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_test_8c_a62d19f1b68cc51e55723b31a29cdef78}\label{_test_8c_a62d19f1b68cc51e55723b31a29cdef78}} 
+int {\bfseries dist}
+\item 
+\mbox{\Hypertarget{_test_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}\label{_test_8c_a5dca9d8a184c97d4e46d5fa9dd227c29}} 
+int {\bfseries tickD}
+\item 
+\mbox{\Hypertarget{_test_8c_a72e1bdde66a91a2bffba233133d5877d}\label{_test_8c_a72e1bdde66a91a2bffba233133d5877d}} 
+int {\bfseries consigneD}
+\item 
+\mbox{\Hypertarget{_test_8c_a45cfe3779f0bdc1e074aba1a625731b0}\label{_test_8c_a45cfe3779f0bdc1e074aba1a625731b0}} 
+int {\bfseries tickG}
+\item 
+\mbox{\Hypertarget{_test_8c_a6329fbfcceb702410066b20f5b7d0637}\label{_test_8c_a6329fbfcceb702410066b20f5b7d0637}} 
+int {\bfseries consigneG}
+\item 
+\mbox{\Hypertarget{_test_8c_a9ba0f2f280a2a2e49c17508af48aad91}\label{_test_8c_a9ba0f2f280a2a2e49c17508af48aad91}} 
+int {\bfseries action}
+\item 
+\mbox{\Hypertarget{_test_8c_a8f74c86ee41744f84cb26aedcd5b641d}\label{_test_8c_a8f74c86ee41744f84cb26aedcd5b641d}} 
+int {\bfseries sens}
+\item 
+\mbox{\Hypertarget{_test_8c_abbd654450a4043caa985ce85b74e4639}\label{_test_8c_abbd654450a4043caa985ce85b74e4639}} 
+int {\bfseries TOF\+\_\+dist}
+\item 
+\mbox{\Hypertarget{_test_8c_a37722a150250e2a5a98e5e0d11e53449}\label{_test_8c_a37722a150250e2a5a98e5e0d11e53449}} 
+int {\bfseries start} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: lib uses to give action command for the robobeer 
+
+\begin{DoxyAuthor}{Author}
+\+: quenphil42 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_test_8c_a04c474ae0427c792f5468e0826ee3b7c}\label{_test_8c_a04c474ae0427c792f5468e0826ee3b7c}} 
+\index{Test.c@{Test.c}!Debut\_Test@{Debut\_Test}}
+\index{Debut\_Test@{Debut\_Test}!Test.c@{Test.c}}
+\doxysubsubsection{\texorpdfstring{Debut\_Test()}{Debut\_Test()}}
+{\footnotesize\ttfamily void Debut\+\_\+\+Test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction qui initialiser les variables mémoires pour l\textquotesingle{}odométrie et change l\textquotesingle{}etat de la variable start. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_test_8c_ab1c116ebf2e0a3999b3669af3e7abc8d}\label{_test_8c_ab1c116ebf2e0a3999b3669af3e7abc8d}} 
+\index{Test.c@{Test.c}!Test\_Canette@{Test\_Canette}}
+\index{Test\_Canette@{Test\_Canette}!Test.c@{Test.c}}
+\doxysubsubsection{\texorpdfstring{Test\_Canette()}{Test\_Canette()}}
+{\footnotesize\ttfamily void Test\+\_\+\+Canette (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction bloquante qui permet de detecter une canette s\textquotesingle{}en approcher, la saisir et la redeposer devant le point de départ du robot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_test_8c_ab52b604af0935235573323f8c769b27e}\label{_test_8c_ab52b604af0935235573323f8c769b27e}} 
+\index{Test.c@{Test.c}!Test\_Odometrie\_Carre@{Test\_Odometrie\_Carre}}
+\index{Test\_Odometrie\_Carre@{Test\_Odometrie\_Carre}!Test.c@{Test.c}}
+\doxysubsubsection{\texorpdfstring{Test\_Odometrie\_Carre()}{Test\_Odometrie\_Carre()}}
+{\footnotesize\ttfamily void Test\+\_\+\+Odometrie\+\_\+\+Carre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction bloquante qui permet de faire deplacer le robot en une trajectoire carrée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_test_8c_a1409e38dca296c0cbae227d4db6ddc85}\label{_test_8c_a1409e38dca296c0cbae227d4db6ddc85}} 
+\index{Test.c@{Test.c}!Test\_Rasp@{Test\_Rasp}}
+\index{Test\_Rasp@{Test\_Rasp}!Test.c@{Test.c}}
+\doxysubsubsection{\texorpdfstring{Test\_Rasp()}{Test\_Rasp()}}
+{\footnotesize\ttfamily void Test\+\_\+\+Rasp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction bloquante non codée pour le moment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{_test_8c_a78c8bbc7921f5517a3a4a4108714a82e}\label{_test_8c_a78c8bbc7921f5517a3a4a4108714a82e}} 
+\index{Test.c@{Test.c}!Test\_Tourner@{Test\_Tourner}}
+\index{Test\_Tourner@{Test\_Tourner}!Test.c@{Test.c}}
+\doxysubsubsection{\texorpdfstring{Test\_Tourner()}{Test\_Tourner()}}
+{\footnotesize\ttfamily void Test\+\_\+\+Tourner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction bloquante qui permet de faire tourner le robot sur lui même un tour. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
