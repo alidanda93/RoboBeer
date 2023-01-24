@@ -1148,3 +1148,36 @@
 2023-01-09 15:10:06,081 [WARN] IP:2112 - Analog_Filter not found: check if there is a RefParameter without a condition.
 2023-01-09 15:10:06,082 [WARN] IP:2112 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
 2023-01-09 15:10:06,082 [WARN] IP:2112 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2023-01-24 13:27:59,302 [INFO] Activator:179 - 
+
+
+2023-01-24 13:27:59,305 [INFO] Activator:180 - !SESSION log4j initialized
+2023-01-24 13:28:39,251 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2023-01-24 13:28:39,252 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2023-01-24 13:28:39,256 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2023-01-24 13:29:15,211 [INFO] Activator:179 - 
+
+
+2023-01-24 13:29:15,214 [INFO] Activator:180 - !SESSION log4j initialized
+2023-01-24 13:29:18,992 [ERROR] ApiDbMcu:1619 - Can't use Application install path:
+2023-01-24 13:29:23,659 [WARN] RulesReader:63 - Compatibility file://mcu/compatibility.xml not found
+2023-01-24 13:29:50,021 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2023-01-24 13:29:50,022 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2023-01-24 13:29:50,026 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2023-01-24 13:30:26,078 [INFO] JxBrowserEngine:114 - Initiate JxBrowser Engine with user profile folder
+2023-01-24 13:30:32,415 [WARN] WebAppUi:336 - Updater plugin not available.
+2023-01-24 13:30:34,283 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 
+2023-01-24 13:30:45,022 [INFO] Activator:179 - 
+
+
+2023-01-24 13:30:45,024 [INFO] Activator:180 - !SESSION log4j initialized
+2023-01-24 13:31:15,470 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2023-01-24 13:31:15,471 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2023-01-24 13:31:15,475 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2023-01-24 13:57:24,690 [INFO] Activator:179 - 
+
+
+2023-01-24 13:57:24,694 [INFO] Activator:180 - !SESSION log4j initialized
+2023-01-24 13:58:14,103 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2023-01-24 13:58:14,105 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2023-01-24 13:58:14,129 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.

@@ -1,8 +1,0 @@
-(fp_lib_table
-  (lib (name "XT60-M")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/XT60-M")(options "")(descr ""))
-  (lib (name "WL-SWTP")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/WL-SWTP")(options "")(descr ""))
-  (lib (name "TB67H451AFNG,EL")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/TB67H451AFNG,EL")(options "")(descr ""))
-  (lib (name "FSM2JSMA")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/FSM2JSMA")(options "")(descr ""))
-  (lib (name "SHOTTKY")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/SHOTTKY")(options "")(descr ""))
-  (lib (name "MC34063ADR2G")(type "KiCad")(uri "D:/Quentin_Documents/KiCad/6.0/Lib_download/MC34063ADR2G")(options "")(descr ""))
-)
