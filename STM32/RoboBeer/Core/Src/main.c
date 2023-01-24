@@ -262,8 +262,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if(start)
 	  {
-		  Test_Rasp();
-		  //Test_Canette();
+		  //Test_Rasp();
+		  Test_Canette();
 		  //Test_Tourner();
 		  //Test_Odometrie_Carre();
 	  }
@@ -340,7 +340,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if (htim->Instance == TIM7) //Tim 7 1sec pour du printf shell
 	{
 		//printf("%d\r\n", dist);
-		//printf("distance : %d\r\n", TOF_dist);
+		printf("distance : %d\r\n", TOF_dist);
 	}
 	else if (htim->Instance == TIM4) //Delay Tof
 		{
@@ -363,7 +363,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(emergencySTOP)
 			{
 			action = STOP;
-			Error_Handler();
+			HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_ALL);
+			//Error_Handler();
 			}
 		else
 		{
@@ -438,7 +439,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  // <----- The ISR Function We're
 	else if (GPIO_Pin == BDT1_Pin || GPIO_Pin == BDT2_Pin || GPIO_Pin == BDT3_Pin || GPIO_Pin == BDT4_Pin)
 	{
 		SwitchLed(2);
-		emergencySTOP = 1;
+		//emergencySTOP = 1;
 	}
 
 }
@@ -460,7 +461,6 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart)
 	}
 	else if(huart->Instance == USART2)
 	{
-		//HAL_UART_Receive_IT(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 		HAL_UART_Receive_DMA(&huart2, uartRxBufferRasp, UART_RX_BUFFER_SIZE_RASP);
 		raspGetChar();
 		raspExec();

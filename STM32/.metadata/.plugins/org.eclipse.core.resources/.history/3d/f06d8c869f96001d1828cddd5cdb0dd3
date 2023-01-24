@@ -1,0 +1,15 @@
+/*
+ * Rasp.h
+ *
+ *  Created on: Jan 17, 2023
+ *      Author: quent
+ */
+
+#ifndef INC_RASP_H_
+#define INC_RASP_H_
+
+
+
+uint8_t raspGetChar(void)
+
+#endif /* INC_RASP_H_ */

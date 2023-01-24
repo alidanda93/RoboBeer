@@ -1,0 +1,10 @@
+16:00:21 **** Incremental Build of configuration Debug for project RoboBeer ****
+make -j8 all 
+arm-none-eabi-size   RoboBeer.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60496	   2032	   2824	  65352	   ff48	RoboBeer.elf
+Finished building: default.size.stdout
+ 
+
+16:00:22 Build Finished. 0 errors, 0 warnings. (took 1s.481ms)
+

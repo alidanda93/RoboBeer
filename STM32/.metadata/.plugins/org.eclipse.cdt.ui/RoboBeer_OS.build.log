@@ -1,0 +1,17 @@
+16:27:54 **** Incremental Build of configuration Debug for project RoboBeer_OS ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "RoboBeer_OS.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Quentin_Documents\Cergy\ENSEA\3A\Projet\Git\STM32\RoboBeer\RoboBeer-main\STM32\RoboBeer_OS\STM32G431RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RoboBeer_OS.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: RoboBeer_OS.elf
+ 
+arm-none-eabi-size   RoboBeer_OS.elf 
+arm-none-eabi-objdump -h -S  RoboBeer_OS.elf  > "RoboBeer_OS.list"
+   text	   data	    bss	    dec	    hex	filename
+  40484	    356	  18932	  59772	   e97c	RoboBeer_OS.elf
+Finished building: default.size.stdout
+ 
+Finished building: RoboBeer_OS.list
+ 
+
+16:27:57 Build Finished. 0 errors, 0 warnings. (took 2s.975ms)
+

@@ -27,7 +27,7 @@
 #define TOURNER		2
 #define STOP		3
 
-#define TOUR 2450
+#define TOUR 2220
 
 
 void InitMCC();

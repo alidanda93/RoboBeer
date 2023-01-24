@@ -25,7 +25,7 @@ int start = 0;
 
 #define DIST 3000
 #define DELAY 1000
-#define OFFSET_OUVERTURE_PINCE 80
+#define OFFSET_OUVERTURE_PINCE 90
 #define TOF_DEVANT_CANNETTE_VALUE 250
 #define TOF_SEUIL 1000
 
@@ -151,9 +151,9 @@ void Test_Tourner()
 	}
 	action =  STOP;
 	dist = 0;
-	ControlServo(SERVO_OPEN);
+	/*ControlServo(SERVO_OPEN);
 	HAL_Delay(2000);
-	ControlServo(SERVO_CLOSED);
+	ControlServo(SERVO_CLOSED);*/
 	HAL_Delay(2000);
 }
 
